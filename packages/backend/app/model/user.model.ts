@@ -20,7 +20,7 @@ const UserSchema = new Schema(
       }
     }
   },
-  { timestamps: true }
+  { timestamps: { createdAt: true, updatedAt: false } }
 )
 
 export default model<IUser>('User', UserSchema)

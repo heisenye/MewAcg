@@ -1,8 +1,8 @@
-import { Schema, model, Document, Error } from 'mongoose'
+import { Schema, model, Document, Error, Types } from 'mongoose'
 import Comic from './comic.model'
 
 export interface IComicChapter extends Document {
-  comicId: string
+  comicId: Types.ObjectId
   chapter: number
   pages: number
 }

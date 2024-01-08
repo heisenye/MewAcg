@@ -7,10 +7,10 @@ export interface IFavorite extends Document {
 
 const FavoriteSchema = new Schema(
   {
-    userId: { type: Types.ObjectId, ref: 'User', required: true },
-    comicId: { type: Types.ObjectId, ref: 'Comic', required: true }
+    userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+    comicId: { type: Schema.Types.ObjectId, ref: 'Comic', required: true }
   },
-  { timestamps: true }
+  { timestamps: { createdAt: true, updatedAt: false } }
 )
 
 FavoriteSchema.pre('save', async function (next) {

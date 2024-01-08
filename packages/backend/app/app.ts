@@ -6,12 +6,15 @@ import { bodyParser } from '@koa/bodyparser'
 import indexRouter from './router/index'
 import comicsRouter from './router/comics'
 import userRouter from './router/user'
+import configRouter from './router/config'
 import { Server } from 'http'
 import logger from './logger'
 import { ResponseCode } from './constants/status'
 import Response from './utils/response'
+import { initializeConfig } from './model/config.model'
 // import Middleware from './utils/middleware'
 
+initializeConfig()
 const app = new Koa()
 app.use(
   cors({
@@ -42,6 +45,7 @@ app.use(bodyParser())
 app.use(indexRouter.routes())
 app.use(comicsRouter.routes()).use(comicsRouter.allowedMethods())
 app.use(userRouter.routes()).use(userRouter.allowedMethods())
+app.use(configRouter.routes()).use(configRouter.allowedMethods())
 
 app.on('error', (err, ctx) => {
   logger.error(err)

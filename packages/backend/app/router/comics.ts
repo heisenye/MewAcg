@@ -40,9 +40,6 @@ router.get(
 )
 router.get('/search', comicController.getSearchComics)
 
-
-
-
 router.put('/comics/:id/cover', Middleware.validateObjectId, comicController.setComicCover)
 router.get('/comics/:id/comments', Middleware.validateObjectId, comicController.getComicComments)
 router.post(

@@ -2,7 +2,6 @@ import * as fs from 'fs'
 import * as path from 'path'
 import { Context } from 'koa'
 import multer = require('@koa/multer')
-import mongoose from 'mongoose'
 import Comic, { IComic } from '../model/comic.model'
 import ComicChapterModel, { IComicChapter } from '../model/comicChapter.model'
 import Favorite from '../model/favorite.model'
@@ -11,7 +10,6 @@ import Response from '../utils/response'
 import { ResponseCode } from '../constants/status'
 import sharp = require('sharp')
 import logger from '../logger'
-import message from '../constants/message'
 
 class ComicController {
   public async getComics(ctx: Context) {
@@ -24,7 +22,7 @@ class ComicController {
     const { id } = ctx.params
     const comic = await Comic.findById(id)
     if (!comic) {
-      ctx.body = Response.Success({})
+      ctx.body = Response.Success()
       return
     }
     ctx.body = Response.Success<IComic>({ data: comic })
@@ -45,7 +43,7 @@ class ComicController {
 
   public async removeComic(ctx: Context) {
     const { id } = ctx.params
-    const result = await Comic.deleteOne({_id: id})
+    const result = await Comic.deleteOne({ _id: id })
     if (result.deletedCount === 0) {
       ctx.response.status = ResponseCode.Not_Found
       ctx.body = Response.NoComic()

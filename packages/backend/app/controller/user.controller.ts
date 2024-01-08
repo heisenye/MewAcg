@@ -6,6 +6,7 @@ import { sign } from 'jsonwebtoken'
 import { ResponseCode } from '../constants/status'
 import Response from '../utils/response'
 import sharp = require('sharp')
+import logger from '../logger'
 const secretKey = process.env.SECRET_KEY as string
 class UserController {
   public async getUsers(ctx: Context) {
@@ -98,7 +99,7 @@ class UserController {
       .resize(300, 300)
       .toFile(filePath, (err) => {
         if (err) {
-          console.error(err)
+          logger.error(err)
         }
       })
 

@@ -16,8 +16,6 @@ export default {
   INCOMPLETE_FORM: '请填写完整的表单',
   DELETE_FAVORITE_SUCCESS: '取消收藏成功',
   ADD_FAVORITE_SUCCESS: '收藏成功',
-  ADD_FAVORITE_FAIL: '收藏失败',
-  DELETE_FAVORITE_FAIL: '取消收藏失败',
   AVATAR_FORMAT_ERROR: '头像格式错误',
   AVATAR_SIZE_ERROR: '头像体积过大',
   UPLOADING: '上传中',

@@ -131,38 +131,25 @@ var __generator =
     }
   }
 Object.defineProperty(exports, '__esModule', { value: true })
-var mongoose_1 = require('mongoose')
-var FavoriteSchema = new mongoose_1.Schema(
-  {
-    userId: { type: mongoose_1.Schema.Types.ObjectId, ref: 'User', required: true },
-    comicId: { type: mongoose_1.Schema.Types.ObjectId, ref: 'Comic', required: true }
-  },
-  { timestamps: { createdAt: true, updatedAt: false } }
-)
-FavoriteSchema.pre('save', function (next) {
-  return __awaiter(this, void 0, void 0, function () {
-    var favorite, id, Comic, error_1
-    return __generator(this, function (_a) {
-      switch (_a.label) {
-        case 0:
-          _a.trys.push([0, 2, , 3])
-          favorite = this
-          id = favorite.comicId
-          Comic = (0, mongoose_1.model)('Comic')
-          return [4 /*yield*/, Comic.updateOne({ _id: id }, { $inc: { favoriteCount: 1 } })]
-        case 1:
-          _a.sent()
-          next()
-          return [3 /*break*/, 3]
-        case 2:
-          error_1 = _a.sent()
-          next(error_1)
-          return [3 /*break*/, 3]
-        case 3:
-          return [2 /*return*/]
-      }
+var config_model_1 = require('../model/config.model')
+var response_1 = require('../utils/response')
+var ConfigController = /** @class */ (function () {
+  function ConfigController() {}
+  ConfigController.prototype.getConfig = function (ctx) {
+    return __awaiter(this, void 0, void 0, function () {
+      var config
+      return __generator(this, function (_a) {
+        switch (_a.label) {
+          case 0:
+            return [4 /*yield*/, config_model_1.default.findOne()]
+          case 1:
+            config = _a.sent()
+            ctx.body = response_1.default.Success({ data: config })
+            return [2 /*return*/]
+        }
+      })
     })
-  })
-})
-var Favorite = (0, mongoose_1.model)('Favorite', FavoriteSchema)
-exports.default = Favorite
+  }
+  return ConfigController
+})()
+exports.default = new ConfigController()
