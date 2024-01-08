@@ -40,7 +40,9 @@ export default {
       if (response && response.code === 200) {
         comments.value = response.data
       }
-      observer.observe(commentInputEl.value)
+      if (commentInputEl.value) {
+        observer.observe(commentInputEl.value)
+      }
     })
     onUnmounted(() => {
       observer.disconnect()
