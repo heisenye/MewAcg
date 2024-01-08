@@ -2,55 +2,50 @@ import request from './request'
 const blankCb = () => {}
 
 export function getConfig() {
-  return request(
-    {
-      method: 'GET',
-      url: '/config',
-    }
-  ).catch(blankCb)
+  return request({
+    method: 'GET',
+    url: '/config'
+  }).catch(blankCb)
 }
 
 export function getComics() {
   return request({
     method: 'GET',
     url: '/comics'
-    }
-  ).catch(blankCb)
+  }).catch(blankCb)
 }
 
 export function getComicsWithoutCache() {
-  return request({
-    method: 'GET',
-    url: '/comics'
-  }, {
-    useCache: false
-  })
-    .catch(blankCb)
+  return request(
+    {
+      method: 'GET',
+      url: '/comics'
+    },
+    {
+      useCache: false
+    }
+  ).catch(blankCb)
 }
 export function getComic(id) {
   return request({
     method: 'GET',
     url: `/comics/${id}`
-  })
-    .catch(blankCb)
+  }).catch(blankCb)
 }
 
 export function deleteComic(id) {
   return request({
     method: 'DELETE',
     url: `/comics/${id}`
-  })
-    .catch(blankCb)
+  }).catch(blankCb)
 }
 
 export function login(data) {
-  return request(
-    {
-      method: 'POST',
-      url: '/login',
-      data: data
-    },
-  ).catch(blankCb)
+  return request({
+    method: 'POST',
+    url: '/login',
+    data: data
+  }).catch(blankCb)
 }
 
 export function register(data) {
@@ -65,18 +60,14 @@ export function register(data) {
       useThrottle: true,
       throttleTime: 3000
     }
-  )
-    .catch(blankCb)
+  ).catch(blankCb)
 }
 
 export function getComicChapter(id, chapter) {
-  return request(
-    {
-      method: 'GET',
-      url: `/comics/${id}/${chapter}`
-    },
-  )
-    .catch(blankCb)
+  return request({
+    method: 'GET',
+    url: `/comics/${id}/${chapter}`
+  }).catch(blankCb)
 }
 
 export function getHistoryComics(ids) {
@@ -93,8 +84,7 @@ export function getHistoryComics(ids) {
     {
       useCache: false
     }
-  )
-    .catch(blankCb)
+  ).catch(blankCb)
 }
 
 export function getProfile(token) {
@@ -107,8 +97,7 @@ export function getProfile(token) {
     {
       useCache: false
     }
-  )
-    .catch(blankCb)
+  ).catch(blankCb)
 }
 
 export function postFavorite(data) {
@@ -123,8 +112,7 @@ export function postFavorite(data) {
       useThrottle: true,
       throttleTime: 3000
     }
-  )
-    .catch(blankCb)
+  ).catch(blankCb)
 }
 
 export function deleteFavorite(id) {
@@ -138,8 +126,7 @@ export function deleteFavorite(id) {
       useThrottle: true,
       throttleTime: 3000
     }
-  )
-    .catch(blankCb)
+  ).catch(blankCb)
 }
 
 export function getFavoriteComics() {
@@ -153,8 +140,7 @@ export function getFavoriteComics() {
       useThrottle: true,
       throttleTime: 1000
     }
-  )
-    .catch(blankCb)
+  ).catch(blankCb)
 }
 
 export function getFavorite(id) {
@@ -168,22 +154,18 @@ export function getFavorite(id) {
       useThrottle: true,
       throttleTime: 1000
     }
-  )
-    .catch(blankCb)
+  ).catch(blankCb)
 }
 
 export function postAvatar(data) {
-  return request(
-    {
-      method: 'POST',
-      url: `/profile/avatar`,
-      data: data,
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    },
-  )
-    .catch(blankCb)
+  return request({
+    method: 'POST',
+    url: `/profile/avatar`,
+    data: data,
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  }).catch(blankCb)
 }
 
 export function getSearch(keyword) {
@@ -201,8 +183,7 @@ export function getSearch(keyword) {
       useThrottle: true,
       throttleTime: 0
     }
-  )
-    .catch(blankCb)
+  ).catch(blankCb)
 }
 
 export function postComic(data) {
@@ -217,30 +198,28 @@ export function postComic(data) {
       useThrottle: true,
       throttleTime: 0
     }
-  )
-    .catch(blankCb)
+  ).catch(blankCb)
 }
 
-export function patchComic({id,field, newVal}) {
+export function patchComic({ id, field, newVal }) {
   return request(
     {
       method: 'PATCH',
       url: `/comic/${id}`,
-      data: {field, newVal}
+      data: { field, newVal }
     },
     {
       useCache: false,
       useThrottle: true,
       throttleTime: 0
     }
-  )
-    .catch(blankCb)
+  ).catch(blankCb)
 }
 
-export function postComicChapter({ id, chapter, formData}) {
+export function postComicChapter({ id, chapter, formData }) {
   return request(
     {
-      method: "POST",
+      method: 'POST',
       url: `/comics/${id}/${chapter}`,
       data: formData,
       headers: {
@@ -252,14 +231,13 @@ export function postComicChapter({ id, chapter, formData}) {
       useThrottle: true,
       throttleTime: 10000
     }
-  )
-    .catch(blankCb)
+  ).catch(blankCb)
 }
 
 export function removeComicChapter(id, chapter) {
   return request(
     {
-      method: "DELETE",
+      method: 'DELETE',
       url: `/comics/${id}/${chapter}`
     },
     {
@@ -267,27 +245,24 @@ export function removeComicChapter(id, chapter) {
       useThrottle: true,
       throttleTime: 10000
     }
-  )
-    .catch(blankCb)
+  ).catch(blankCb)
 }
 
-export function putComicCoverImage({id, chapter, page}) {
-  return request(
-      {
-      method: "PUT",
-      url: `/comics/${id}/cover`,
-      data: {
-        chapter: chapter,
-        page: page
-      }
+export function putComicCoverImage({ id, chapter, page }) {
+  return request({
+    method: 'PUT',
+    url: `/comics/${id}/cover`,
+    data: {
+      chapter: chapter,
+      page: page
     }
-  ).catch(blankCb)
+  }).catch(blankCb)
 }
 
 export function getComicComments(id) {
   return request(
     {
-      method: "GET",
+      method: 'GET',
       url: `comics/${id}/comments`
     },
     {
@@ -298,10 +273,10 @@ export function getComicComments(id) {
   ).catch(blankCb)
 }
 
-export function postComicComment({id, content}) {
+export function postComicComment({ id, content }) {
   return request(
     {
-      method: "POST",
+      method: 'POST',
       url: `/comics/${id}/comments`,
       data: { content }
     },

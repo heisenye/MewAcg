@@ -36,27 +36,24 @@ const ToastBox = defineComponent({
       middle: 'toast-middle'
     }
 
-    const closeBtnClass = [
-      'absolute',
-      'right-0',
-      'top-0',
-      'text-lg',
-      'xl:text-xl',
-      '2xl:text-2xl'
-    ]
+    const closeBtnClass = ['absolute', 'right-0', 'top-0', 'text-lg', 'xl:text-xl', '2xl:text-2xl']
 
     const alertTypeClass = types[props.type].alertType
-    const ToastPosClass = props.position.map(pos => positions[pos])
+    const ToastPosClass = props.position.map((pos) => positions[pos])
 
     return () => {
       return (
         <div class={['toast', 'font-Noto', 'z-50', ToastPosClass]}>
           <div class={['alert', 'rounded-lg', alertTypeClass]}>
-              <span class='text-sm'>
-                {props.msg}
-              </span>
+            <span class="text-sm">{props.msg}</span>
           </div>
-          <TheButton type="ghost" shape="circle" size="sm" class={closeBtnClass} onClick={props.click}>
+          <TheButton
+            type="ghost"
+            shape="circle"
+            size="sm"
+            class={closeBtnClass}
+            onClick={props.click}
+          >
             <i class="fa-solid fa-xmark-circle"></i>
           </TheButton>
         </div>

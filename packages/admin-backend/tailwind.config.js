@@ -4,7 +4,7 @@ module.exports = {
     extend: {
       fontFamily: {
         Poppins: ['Poppins', 'sans-serif'],
-        Noto: ['Noto Sans SC', 'sans-serif'],
+        Noto: ['Noto Sans SC', 'sans-serif']
       },
       screens: {
         xs: '300px',

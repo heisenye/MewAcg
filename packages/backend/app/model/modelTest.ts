@@ -6,22 +6,18 @@ mongoose.connect('mongodb://localhost:27017/acg').then(() => {
 })
 
 const TestSchema = new mongoose.Schema({
-  name: {type: String, required: true},
-  age: {type: Number}
+  name: { type: String, required: true },
+  age: { type: Number }
 })
 
 const Test = mongoose.model('Test', TestSchema)
 
-
 async function cr() {
-  const response = await Test.create(
-    {
-      age: 20
-    }
-  )
+  const response = await Test.create({
+    age: 20
+  })
   console.log(response)
 }
-
 
 cr()
 

@@ -32,10 +32,10 @@ export default {
     const selectedPage = ref(1)
 
     onMounted(async () => {
-        const response = await http.getComic(id)
-        selectedComic.value = response.data
-        selectedChapter.value = response.data.coverImage.chapter
-        selectedPage.value = response.data.coverImage.page
+      const response = await http.getComic(id)
+      selectedComic.value = response.data
+      selectedChapter.value = response.data.coverImage.chapter
+      selectedPage.value = response.data.coverImage.page
     })
     const selectCoverImage = async (chapter, page) => {
       selectedChapter.value = chapter
@@ -131,25 +131,25 @@ export default {
     }
 
     const createChapter = async () => {
-        images.value.forEach((image) => {
-          formData.append('images', image)
+      images.value.forEach((image) => {
+        formData.append('images', image)
+      })
+      const response = await http.postComicChapter({
+        id,
+        chapter: selectedComic.value.chapters + 1,
+        formData
+      })
+      if (response && response.code === 200) {
+        document.getElementById('newChapter').close()
+        showMsg({
+          messageType: 'success',
+          msg: msg['CREATE_COMIC_CHAPTER_SUCCESS'],
+          popupType: 'toast'
         })
-        const response = await http.postComicChapter({
-          id,
-          chapter: selectedComic.value.chapters + 1,
-          formData
-        })
-        if (response && response.code === 200) {
-          document.getElementById('newChapter').close()
-          showMsg({
-            messageType: 'success',
-            msg: msg['CREATE_COMIC_CHAPTER_SUCCESS'],
-            popupType: 'toast'
-          })
-          setTimeout(() => {
-            router.go(0)
-          }, 1000)
-        }
+        setTimeout(() => {
+          router.go(0)
+        }, 1000)
+      }
     }
 
     const viewChapter = async (chapter) => {
@@ -166,9 +166,7 @@ export default {
       }
     }
 
-    const removeChapter = async () => {
-
-    }
+    const removeChapter = async () => {}
 
     return {
       BASE_URL,
@@ -223,7 +221,7 @@ export default {
       <div
         class="navbar min-h-0 max-w-4xl w-full mx-auto bg-base-200 rounded-lg flex-col space-y-4 px-6"
       >
-<!--    name   -->
+        <!--    name   -->
         <div class="w-full pl-4">
           <span class="mr-auto text-lg 2xl:text-xl">名字</span>
           <span class="text-lg mx-auto">{{ selectedComic.name }}</span>
@@ -235,7 +233,7 @@ export default {
           >
             <TheIcon type="pencil" size="lg" />
           </TheButton>
-<!--     modal     -->
+          <!--     modal     -->
           <TheModal id="name">
             <input type="text" class="input input-info mx-auto block" v-model="comicName" />
             <form method="dialog">
@@ -248,9 +246,9 @@ export default {
             </form>
           </TheModal>
         </div>
-<!--    name   -->
+        <!--    name   -->
         <div class="divider divider-primary"></div>
-<!--    author      -->
+        <!--    author      -->
         <div class="w-full pl-4">
           <span class="mr-auto text-lg 2xl:text-xl">作者</span>
           <span class="text-lg mx-auto">{{ selectedComic.author }}</span>
@@ -262,7 +260,7 @@ export default {
           >
             <TheIcon type="pencil" size="lg" />
           </TheButton>
-<!--     modal     -->
+          <!--     modal     -->
           <TheModal id="author">
             <input type="text" class="input input-info mx-auto block" v-model="comicAuthor" />
             <form method="dialog">
@@ -275,9 +273,9 @@ export default {
             </form>
           </TheModal>
         </div>
- <!--    author      -->
+        <!--    author      -->
         <div class="divider divider-primary"></div>
-<!--     status     -->
+        <!--     status     -->
         <div class="w-full pl-4">
           <span class="mr-auto text-lg 2xl:text-xl">状态</span>
           <span class="text-lg mx-auto">{{
@@ -291,7 +289,7 @@ export default {
           >
             <TheIcon type="pencil" size="lg" />
           </TheButton>
-<!--      modal    -->
+          <!--      modal    -->
           <TheModal id="status">
             <select class="select select-bordered block mx-auto" required v-model="comicStatus">
               <option disabled selected value="">状态</option>
@@ -311,7 +309,7 @@ export default {
             </form>
           </TheModal>
         </div>
-<!--     status     -->
+        <!--     status     -->
         <div class="divider divider-primary"></div>
         <div class="w-full pl-4">
           <span class="mr-auto text-lg 2xl:text-xl">简介</span>
@@ -342,7 +340,7 @@ export default {
           </TheModal>
         </div>
         <div class="divider divider-primary"></div>
-<!--     tags     -->
+        <!--     tags     -->
         <div class="w-full pl-4">
           <span class="mr-auto text-lg 2xl:text-xl">标签</span>
           <template v-for="tag in selectedComic.tags">
@@ -356,7 +354,7 @@ export default {
           >
             <TheIcon type="pencil" size="lg" />
           </TheButton>
-<!--     modal     -->
+          <!--     modal     -->
           <TheModal id="tags">
             <div class="grid grid-cols-3 gap-2">
               <template v-for="tag in tags" :key="tag">
@@ -381,9 +379,9 @@ export default {
             </form>
           </TheModal>
         </div>
-<!--     tags     -->
+        <!--     tags     -->
         <div class="divider divider-primary"></div>
-<!--     cover      -->
+        <!--     cover      -->
         <div v-if="selectedComic.coverImage" class="w-full pl-4">
           <span class="mr-auto text-lg 2xl:text-xl whitespace-nowrap">封面</span>
           <div class="px-8 max-w-screen-xs">
@@ -443,7 +441,7 @@ export default {
             </div>
           </TheModal>
         </div>
-<!--     cover      -->
+        <!--     cover      -->
         <div class="divider divider-primary"></div>
         <div class="w-full pl-4">
           <span class="mr-auto text-lg 2xl:text-xl">章节数</span>
@@ -462,13 +460,18 @@ export default {
             <div class="w-full grid grid-cols-3 gap-4">
               <template v-for="i in selectedComic.chapters" :key="i">
                 <div class="indicator w-full">
-                  <TheIcon class="indicator-item badge badge-error" type="xmark" size="xs" @click="removeChapter"/>
+                  <TheIcon
+                    class="indicator-item badge badge-error"
+                    type="xmark"
+                    size="xs"
+                    @click="removeChapter"
+                  />
                   <TheButton
                     type="ghost"
                     class="bg-primary-content w-full"
                     onclick="document.getElementById('viewChapterModal').showModal()"
                     @click="viewChapter(i)"
-                  >{{ i }}
+                    >{{ i }}
                   </TheButton>
                 </div>
               </template>

@@ -41,14 +41,13 @@ function createRequest() {
         }
         return response.data
       })
-      .catch(error => {
+      .catch((error) => {
         if (useCache) {
           cache.delete(configKey)
         }
         throw error
       })
   }
-
 
   return execute
 }

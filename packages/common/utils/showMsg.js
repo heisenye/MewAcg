@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 import AlertBox from './AlertBox'
 import ToastBox from './ToastBox'
 
-function showMsg({ msg, messageType , popupType = 'alert', toastPos, fn }) {
+function showMsg({ msg, messageType, popupType = 'alert', toastPos, fn }) {
   const div = document.createElement('div')
   document.body.appendChild(div)
   let box
@@ -31,7 +31,9 @@ function showMsg({ msg, messageType , popupType = 'alert', toastPos, fn }) {
     }
   }
 
-  if (popupType === 'toast' && toastPos) { appProps.position = toastPos }
+  if (popupType === 'toast' && toastPos) {
+    appProps.position = toastPos
+  }
 
   const app = createApp(box, appProps)
   app.mount(div)

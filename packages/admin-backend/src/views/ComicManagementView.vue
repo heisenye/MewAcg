@@ -1,6 +1,6 @@
 <script>
 import { onMounted, ref, Transition } from 'vue'
-import { RouterLink,useRouter } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
 import { TheButton, TheIcon, TheModal } from 'ui'
 import { http, msg, comicConstants, AlertBox, showMsg } from 'common'
 
@@ -47,8 +47,8 @@ export default {
         document.getElementById('newComicModal').close()
         showMsg({
           msg: msg['CREATE_COMIC_SUCCESS'],
-          messageType: "success",
-          popupType: "toast"
+          messageType: 'success',
+          popupType: 'toast'
         })
         setTimeout(() => {
           router.go(0)
@@ -69,7 +69,9 @@ export default {
 
     onMounted(async () => {
       comicsCount.value = (await http.getComicsWithoutCache()).data.length
-      unfilledComics.value = (await http.getComicsWithoutCache()).data.filter((comic) => comic.chapters === 0)
+      unfilledComics.value = (await http.getComicsWithoutCache()).data.filter(
+        (comic) => comic.chapters === 0
+      )
       unfilledComicsCount.value = unfilledComics.value.length
     })
 
