@@ -31,10 +31,11 @@ body {
   :root[data-theme='dark_'] {
     color-scheme: dark;
     --fallback-b1: #000000;
-    --fallback-bc: rgb(229 229 229);
+    --fallback-bc: rgb(214 211 209);
     --fallback-p: rgb(38 38 38);
+    --fallback-pc: rgb(231 229 228);
     --fallback-s: rgb(82 82 82);
-    --fallback-sc: rgb(228 228 231);
+    --fallback-sc: rgb(231 229 228);
     --fallback-a: rgb(165 180 252);
     --fallback-ac: rgb(221 214 254);
     --fallback-n: rgb(100 116 139);

@@ -164,7 +164,7 @@ var UserController = /** @class */ (function () {
                             data: {
                                 id: id,
                                 username: username,
-                                createdAt: new Date(createdAt).toLocaleDateString()
+                                createdAt: new Date(createdAt).toLocaleDateString().replace(/\//g, '-')
                             }
                         });
                         return [2 /*return*/];
