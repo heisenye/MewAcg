@@ -113,18 +113,20 @@ export default {
       <TheComment :comment="comment" />
     </template>
   </main>
-  <Transition>
-    <TheButton
-      v-show="isScrollButtonShow"
-      type="info"
-      shape="circle"
-      style="translate: -50% 0"
-      class="fixed top-20 left-1/2 shadow-md shadow-info"
-      @click="scrollToCommentInputEl"
-    >
-      <TheIcon type="arrow-up" />
-    </TheButton>
-  </Transition>
+  <teleport to="body">
+    <Transition>
+      <div class="fixed top-20 w-full flex justify-center" v-show="isScrollButtonShow">
+        <TheButton
+          type="info"
+          shape="circle"
+          class="shadow-md shadow-info"
+          @click="scrollToCommentInputEl"
+        >
+          <TheIcon type="arrow-up" />
+        </TheButton>
+      </div>
+    </Transition>
+  </teleport>
 </template>
 
 <style scoped>
