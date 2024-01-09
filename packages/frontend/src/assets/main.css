@@ -28,18 +28,47 @@ body {
 }
 
 @supports not (color: oklch(0 0 0)) {
-  :root {
-    color-scheme: dark_;
+  :root[data-theme='dark_'] {
+    color-scheme: dark;
+    --fallback-b1: #000000;
+    --fallback-bc: rgb(229 229 229);
     --fallback-p: rgb(38 38 38);
     --fallback-s: rgb(82 82 82);
+    --fallback-sc: rgb(228 228 231);
     --fallback-a: rgb(165 180 252);
+    --fallback-ac: rgb(221 214 254);
     --fallback-n: rgb(100 116 139);
-    --fallback-b1: #000000;
-    --fallback-bc: rgb(214 211 209);
+    --fallback-nc: rgb(209 213 219);
     --fallback-in: rgb(96 165 250);
     --fallback-su: rgb(52 211 153);
+    --fallback-suc: rgb(2 44 34);
     --fallback-wa: rgb(217 119 6);
+    --fallback-wac: rgb(255 237 213);
     --fallback-er: rgb(248 113 113);
+    --fallback-erc: rgb(76 5 25);
+  }
+  :root[data-theme='light_'] {
+    color-scheme: light;
+    --fallback-p: #7582ff;
+    --fallback-pc: #050617;
+    --fallback-s: #ff71cf;
+    --fallback-sc: #190211;
+    --fallback-a: #00c7b5;
+    --fallback-ac: #000e0c;
+    --fallback-n: #2a323c;
+    --fallback-nc: #a6adbb;
+    --fallback-b1: #1d232a;
+    --fallback-b2: #191e24;
+    --fallback-b3: #15191e;
+    --fallback-bc: #a6adbb;
+    --fallback-in: #00b3f0;
+    --fallback-inc: #000000;
+    --fallback-su: #00ca92;
+    --fallback-suc: #000000;
+    --fallback-wa: #ffc22d;
+    --fallback-wac: #000000;
+    --fallback-er: #ff6f70;
+    --fallback-erc: #000000;
   }
 }
 
@@ -87,7 +116,7 @@ body {
   }
 
   .nav-input {
-    @apply input bg-secondary w-full h-9 pl-12 xl:pl-14 2xl:pl-16 3xl:h-10 3xl:pl-20 text-sm 3xl:text-base rounded tracking-widest;
+    @apply input bg-secondary w-full h-9 pl-12 xl:pl-14 2xl:pl-16 3xl:h-10 3xl:pl-20 text-sm 3xl:text-base rounded tracking-widest placeholder:font-base placeholder:font-black;
   }
   .nav-input-container {
     @apply relative mx-auto hidden lg:flex lg:items-center w-[20rem] xl:w-[24rem] 2xl:w-[27rem] 3xl:w-[30rem] font-Noto;

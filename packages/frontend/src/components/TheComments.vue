@@ -1,6 +1,6 @@
 <script>
 import { computed, onMounted, onUnmounted, ref } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, RouterLink } from 'vue-router'
 import TheComment from '@/components/TheComment.vue'
 import { getComicComments, postComicComment } from '@/utils/http.js'
 import { refresh } from '@/utils/router.js'
@@ -12,7 +12,8 @@ export default {
   components: {
     TheButton,
     TheIcon,
-    TheComment
+    TheComment,
+    RouterLink
   },
   setup() {
     const route = useRoute()
@@ -57,11 +58,11 @@ export default {
           messageType: 'success',
           popupType: 'toast',
           toastPos: ['bottom', 'right']
-        }) // showMsg
+        })
         setTimeout(() => {
           refresh()
-        }, 1000) // setTimeout
-      } // if
+        }, 1000)
+      }
     }
 
     const scrollToCommentInputEl = () => {
@@ -91,14 +92,16 @@ export default {
       class="text-xs link-info link-hover self-center font-base mb-3"
       >当前未登录,立即登录</RouterLink
     >
-    <textarea
-      ref="commentInputEl"
-      :disabled="!token"
-      v-model="inputComment"
-      placeholder="输入评论"
-      rows="3"
-      class="textarea textarea-secondary text-accent-content mb-4"
-    ></textarea>
+    <div class="w-full">
+      <textarea
+        ref="commentInputEl"
+        :disabled="!token"
+        v-model="inputComment"
+        placeholder="输入评论"
+        rows="3"
+        class="textarea textarea-secondary block mx-auto max-w-lg w-full mb-4 text-accent-content"
+      ></textarea>
+    </div>
     <TheButton
       type="neutral"
       :disabled="isSubmitDisabled"

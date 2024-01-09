@@ -45,19 +45,23 @@ module.exports = {
         dark_: {
           'base-100': '#000000',
 
+          'base-content': 'rgb(229 229 229)',
+
           primary: 'rgb(38 38 38)',
+
+          'primary-content': 'rgb(229 229 229)',
 
           secondary: 'rgb(82, 82, 82)',
 
-          'secondary-content': 'rgb(228 228 231)',
+          'secondary-content': 'rgb(229 229 229)',
 
-          accent: 'rgb(165 180 252)',
+          accent: 'rgb(199 210 254)',
 
           'accent-content': 'rgb(221 214 254)',
 
           neutral: 'rgb(100 116 139)',
 
-          'neutral-content': "rgb(209 213 219)",
+          'neutral-content': "rgb(214 211 209)",
 
           info: 'rgb(96 165 250)',
 
