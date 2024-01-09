@@ -1,11 +1,11 @@
 <script>
 import { goBook } from '@/utils/router'
 import { BASE_URL } from 'common'
-import { TheImage } from 'ui'
+import { TheImage, TheIcon } from 'ui'
 
 export default {
   name: 'TheComicRows',
-  components: { TheImage },
+  components: { TheImage, TheIcon },
   props: {
     comicList: {
       type: Array,
@@ -43,8 +43,8 @@ export default {
             <h1 class="text-base text-center mt-2 mb-1 tracking-wide font-base">
               {{ comic.name }}
             </h1>
-            <span class="pl-3 text-xs opacity-80 font-base">{{ comic.author }}</span>
-            <div class="pl-3 pb-4 mt-1 space-x-1 text-xs text-accent opacity-60">
+            <span class="px-3 text-xs text-neutral-content font-base">{{ comic.author }}</span>
+            <div class="px-3 pb-4 mt-1 space-x-1 text-xs text-accent-content opacity-80">
               <i class="fa-solid fa-eye"></i>
               <span>{{ comic.viewCount }}</span
               >&nbsp;&nbsp;

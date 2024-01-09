@@ -1,10 +1,11 @@
 <script>
 import { onMounted, onUnmounted, ref } from 'vue'
-import { refresh } from '@/utils/router'
 import { useUserStore } from '@/stores/userStore'
 import TheAvatar from '@/components/TheAvatar.vue'
+import { refresh } from '@/utils/router'
+import { getProfile, postAvatar } from '@/utils/http.js'
 import { TheButton, TheIcon } from 'ui'
-import { useToken, http, showMsg, msg, BASE_URL } from 'common'
+import { useToken, showMsg, msg, BASE_URL } from 'common'
 
 const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg']
 
@@ -61,21 +62,32 @@ export default {
     }
 
     const uploadAvatar = async () => {
-      showMsg({
+      previewAvatarModal.value.close()
+      const uploadingBox = showMsg({
         msg: msg['UPLOADING'],
         messageType: 'info',
-        popupType: 'alert'
+        popupType: 'alert',
+        duration: 8000
       })
       const form = new FormData()
       form.append('avatar', uploadAvatarInput.value.files[0])
-      const response = await http.postAvatar(form)
-      if (response.code === 200) {
-        refresh()
+      const response = await postAvatar(form)
+      if (response && response.code === 200) {
+        uploadingBox.close()
+        showMsg({
+          msg: msg['UPLOAD_SUCCESS'],
+          messageType: 'success',
+          popupType: 'toast',
+          toastPos: ['bottom', 'end']
+        })
+        setTimeout(() => {
+          refresh()
+        }, 1000)
       }
     }
 
     onMounted(async () => {
-      const response = await http.getProfile(token.value)
+      const response = await getProfile(token.value)
       if (response.code === 200) {
         userStore.setUser(response.data)
       }

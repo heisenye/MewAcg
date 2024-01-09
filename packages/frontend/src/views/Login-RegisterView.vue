@@ -1,10 +1,11 @@
 <script>
 import { ref } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
-import { goHome, replaceLogin } from '@/utils/router'
 import { useUserStore } from '@/stores/userStore'
+import { goHome, replaceLogin } from '@/utils/router'
+import { login, register } from '@/utils/http.js'
 import { TheButton, TheIcon } from 'ui'
-import { http, msg, useToken, showMsg } from 'common'
+import { msg, useToken, showMsg } from 'common'
 
 export default {
   name: 'Login-Register',
@@ -38,7 +39,7 @@ export default {
         }
       }
 
-      const response = await http.login(data)
+      const response = await login(data)
       if (response && response.code === 200) {
         userStore.setUser(response.data)
 
@@ -71,7 +72,7 @@ export default {
           return
         }
       }
-      const response = await http.register(data)
+      const response = await register(data)
       if (response.code === 200) {
         isSuccess.value = true
         showMsg({

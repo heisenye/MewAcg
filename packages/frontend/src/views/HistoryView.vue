@@ -2,13 +2,14 @@
 import { onMounted, ref, watchEffect } from 'vue'
 import { goBook } from '@/utils/router'
 import useHistory from '@/utils/useHistory.js'
-import { TheImage } from 'ui'
-import { http, BASE_URL } from 'common'
+import { getHistoryComics } from '@/utils/http.js'
+import { TheImage, TheIcon } from 'ui'
+import { BASE_URL } from 'common'
 
 export default {
   name: 'HistoryView',
   methods: { goBook },
-  components: { TheImage },
+  components: { TheImage, TheIcon },
   setup() {
     const { history } = useHistory
 
@@ -22,7 +23,7 @@ export default {
     })
 
     onMounted(async () => {
-      const response = await http.getHistoryComics(history.value)
+      const response = await getHistoryComics(history.value)
       if (response && response.code === 200) {
         const comics = response.data
         historyComics.value = comics.sort((a, b) => {
@@ -54,10 +55,11 @@ export default {
           :src="`${BASE_URL}/${comic._id}/${comic.coverImage.chapter}/${comic.coverImage.page}.webp`"
           @click="goBook(comic._id)"
         />
-        <i
-          class="indicator-item cursor-pointer fa-solid fa-circle-xmark absolute right-2"
+        <TheIcon
+          type="circle-xmark"
+          class="indicator-item right-3 cursor-pointer fa-solid text-error"
           @click="useHistory.removeHistoryFromStorage(comic._id)"
-        ></i>
+        />
         <div
           class="card-body text-center bg-primary rounded-b-2xl font-base py-6 px-0 whitespace-nowrap"
         >
@@ -67,7 +69,7 @@ export default {
     </template>
     <h1
       v-if="isRequestComplete && historyComics.length === 0"
-      class="relative top-20 text-lg font-black text-center font-base"
+      class="relative top-20 text-lg text-center font-base font-black"
     >
       当前未观看漫画哦
     </h1>

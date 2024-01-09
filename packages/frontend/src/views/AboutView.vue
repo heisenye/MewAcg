@@ -1,7 +1,7 @@
 <script>
 import { onMounted, ref } from 'vue'
+import { getConfig } from '@/utils/http.js'
 import { TheIcon } from 'ui'
-import { http } from 'common'
 
 export default {
   name: 'AboutView',
@@ -10,7 +10,7 @@ export default {
     const config = ref([])
 
     onMounted(async () => {
-      const response = await http.getConfig()
+      const response = await getConfig()
       if (response && response.code === 200) {
         config.value = response.data
       }

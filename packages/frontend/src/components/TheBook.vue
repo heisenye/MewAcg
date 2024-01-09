@@ -1,9 +1,10 @@
 <script>
 import { onMounted, ref, watch, toRefs } from 'vue'
 import { useRoute } from 'vue-router'
-import { TheButton, TheIcon, TheImage, TheModal } from 'ui'
-import { http, useToken, showMsg, msg, BASE_URL } from 'common'
 import TheComments from '@/components/TheComments.vue'
+import { getFavorite, deleteFavorite, postFavorite } from '@/utils/http.js'
+import { TheButton, TheIcon, TheImage, TheModal } from 'ui'
+import { useToken, showMsg, msg, BASE_URL } from 'common'
 
 export default {
   name: 'TheBook',
@@ -46,7 +47,7 @@ export default {
       if (!token.value) {
         return
       }
-      const response = await http.getFavorite(id)
+      const response = await getFavorite(id)
       if (response.data) {
         isFavorited.value = true
       }
@@ -62,7 +63,7 @@ export default {
         return
       }
       if (isFavorited.value) {
-        const response = await http.deleteFavorite(id)
+        const response = await deleteFavorite(id)
         if (response.code === 200) {
           isFavorited.value = false
           favoriteCount.value--
@@ -74,7 +75,7 @@ export default {
           })
         }
       } else {
-        const response = await http.postFavorite({
+        const response = await postFavorite({
           id
         })
         if (response.code === 200) {

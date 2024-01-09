@@ -1,9 +1,10 @@
 <script>
 import { onMounted, onUnmounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
-import { TheImage, TheNavigation, TheIcon, TheButton, TheModal } from 'ui'
-import { http, useDebounce } from 'common'
 import TheRead from '@/components/TheRead.vue'
+import { getComicChapter } from '@/utils/http.js'
+import { TheImage, TheNavigation, TheIcon, TheButton, TheModal } from 'ui'
+import { useDebounce } from 'common'
 
 export default {
   name: 'ReadView',
@@ -29,7 +30,7 @@ export default {
     })() //IIFE Immediately Invoked Function Expression
 
     onMounted(async () => {
-      const response = await http.getComicChapter(id, chapter)
+      const response = await getComicChapter(id, chapter)
       pages.value = response.data.pages
       window.addEventListener('scroll', scrollFn)
     })

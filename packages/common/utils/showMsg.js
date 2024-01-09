@@ -2,8 +2,9 @@ import { createApp } from 'vue'
 import AlertBox from './AlertBox'
 import ToastBox from './ToastBox'
 
-function showMsg({ msg, messageType, popupType = 'alert', toastPos, fn }) {
+function showMsg({ msg, messageType, popupType = 'alert', toastPos, duration = 1500, fn }) {
   const div = document.createElement('div')
+  div.setAttribute('id', 'msg')
   document.body.appendChild(div)
   let box
 
@@ -45,7 +46,17 @@ function showMsg({ msg, messageType, popupType = 'alert', toastPos, fn }) {
     }, 500)
 
     div.classList.add('opacity-0', 'transition-opacity', 'duration-500')
-  }, 1500)
+  }, duration)
+
+  return {
+    close: () => {
+      setTimeout(() => {
+        app.unmount()
+        div.remove()
+      }, 500)
+      div.classList.add('opacity-0', 'transition-opacity', 'duration-500')
+    }
+  }
 }
 
 export default showMsg

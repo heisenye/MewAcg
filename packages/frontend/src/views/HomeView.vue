@@ -1,8 +1,9 @@
 <script>
 import { onBeforeMount, ref } from 'vue'
-import { goBook } from '@/utils/router'
 import ComicRecommendation from '@/components/TheComicsRow.vue'
-import { http, BASE_URL } from 'common'
+import { goBook } from '@/utils/router'
+import { getComics } from '@/utils/http.js'
+import { BASE_URL } from 'common'
 
 export default {
   name: 'HomeView',
@@ -11,8 +12,8 @@ export default {
     const comicList = ref(null)
 
     onBeforeMount(async () => {
-      const response = await http.getComics()
-      if (response) {
+      const response = await getComics()
+      if (response && response.code === 200) {
         comicList.value = response.data.filter((comic) => comic.chapters !== 0)
       }
     })

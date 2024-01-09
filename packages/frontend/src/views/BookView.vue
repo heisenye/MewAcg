@@ -1,10 +1,10 @@
 <script>
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
-import { goBack, goHome } from '@/utils/router'
 import TheBook from '@/components/TheBook.vue'
+import { goBack, goHome } from '@/utils/router'
+import { getComic } from '@/utils/http.js'
 import { TheNavigation, TheButton, TheIcon } from 'ui'
-import { http } from 'common'
 
 export default {
   name: 'BookView',
@@ -16,7 +16,7 @@ export default {
     const comic = ref(null)
 
     onMounted(async () => {
-      const response = await http.getComic(id)
+      const response = await getComic(id)
       if (response.code === 200) {
         comic.value = response.data
       }

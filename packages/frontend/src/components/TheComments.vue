@@ -1,10 +1,11 @@
 <script>
-import { computed, onBeforeMount, onMounted, onUnmounted, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
-import { refresh } from '@/utils/router.js'
 import TheComment from '@/components/TheComment.vue'
+import { getComicComments, postComicComment } from '@/utils/http.js'
+import { refresh } from '@/utils/router.js'
 import { TheButton, TheIcon } from 'ui'
-import { http, showMsg, msg, useToken } from 'common'
+import { showMsg, msg, useToken } from 'common'
 
 export default {
   name: 'TheComments',
@@ -19,7 +20,7 @@ export default {
 
     const { token } = useToken
     const inputComment = ref('')
-    const commentInputEl = ref(null)
+    const commentInputEl = ref()
     const isSubmitDisabled = computed(() => !inputComment.value)
     const isScrollButtonShow = ref(false)
 
@@ -36,7 +37,7 @@ export default {
     )
     const comments = ref([])
     onMounted(async () => {
-      const response = await http.getComicComments(id)
+      const response = await getComicComments(id)
       if (response && response.code === 200) {
         comments.value = response.data
       }
@@ -49,7 +50,7 @@ export default {
     })
 
     const commentSubmitHandler = async () => {
-      const response = await http.postComicComment({ id, content: inputComment.value })
+      const response = await postComicComment({ id, content: inputComment.value })
       if (response && response.code === 200) {
         showMsg({
           msg: msg['SUBMIT_COMMENT_SUCCESS'],

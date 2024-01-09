@@ -1,10 +1,10 @@
 <script>
 import { ref, watch, onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
-import { goBack, goSearchResult } from '@/utils/router'
 import TheComics from '@/components/TheComics.vue'
+import { getSearch } from '@/utils/http.js'
+import { goBack, goSearchResult } from '@/utils/router'
 import { TheButton, TheIcon, TheNavigation } from 'ui'
-import { http } from 'common'
 
 export default {
   name: 'SearchView',
@@ -14,7 +14,7 @@ export default {
 
     const keyword = route.query.keyword ? ref(route.query.keyword) : ref('')
     const isSearchDisabled = computed(() => !keyword.value.trim())
-    const searchComics = ref([])
+    const isRequestCompleted = ref(false)
 
     watch(
       () => route.query.keyword,
@@ -23,11 +23,13 @@ export default {
       }
     )
 
+    const searchComics = ref([])
     onMounted(async () => {
       if (keyword.value.trim()) {
-        const response = await http.getSearch(keyword.value)
+        const response = await getSearch(keyword.value)
         searchComics.value = response.data
       }
+      isRequestCompleted.value = true
     })
 
     const searchFn = () => {
@@ -41,6 +43,7 @@ export default {
       keyword,
       isSearchDisabled,
       searchComics,
+      isRequestCompleted,
 
       searchFn
     }
@@ -94,7 +97,7 @@ export default {
     </TheNavigation>
     <h1
       class="absolute top-44 text-xl text-center w-full text-white font-black font-base"
-      v-if="searchComics.length === 0 && $route.query.keyword"
+      v-if="isRequestCompleted && searchComics.length === 0 && $route.query.keyword"
     >
       什么也没有找见
     </h1>

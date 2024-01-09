@@ -37,55 +37,22 @@ service.interceptors.response.use(
     return response
   },
   (error) => {
-    console.log(error)
     if (error.config.loading) {
       error.config.loading.remove()
     }
-
-    if (error.code === 'ERR_BAD_REQUEST' && error.response.status === 405) {
-      error.response.data = {
-        code: 405,
-        msg: msg['METHOD_NOT_ALLOWED']
-      }
-    }
-
-    if (error.code === 'ERR_BAD_RESPONSE' && error.response.status === 500) {
-      error.response.data = {
-        code: 500,
-        msg: msg['INTERNAL_SERVER_ERROR']
-      }
-    }
-
-    if (error.code === 'ERR_BAD_REQUEST' && error.response.status === 429) {
-      error.response.data = {
-        code: 429,
-        msg: msg['TOO_MANY_REQUESTS_RETRY_AFTER'](error.response.headers['retry-after'])
-      }
-    }
-
     if (!error.response) {
       if (error.code === 'ERR_NETWORK') {
-        error.response = {
-          data: {
-            code: 500,
-            msg: msg['NETWORK_ERROR']
-          }
-        }
+        error.response.data = msg['NETWORK_ERROR']
       } else {
-        error.response = {
-          data: {
-            code: 500,
-            msg: msg['UNKNOWN_ERROR']
-          }
-        }
+        error.response.data = msg['UNKNOWN_ERROR']
       }
     }
-    if (error.response.data.code === 401) {
+    if (error.response.status === 401) {
       removeToken()
     }
 
     showMsg({
-      msg: error.response.data.msg,
+      msg: error.response.data,
       messageType: 'error',
       popupType: 'alert'
     })
