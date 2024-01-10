@@ -40,10 +40,10 @@ export default {
             />
           </div>
           <div class="relative w-full bg-primary rounded-b-2xl">
-            <h1 class="text-base text-center mt-2 mb-1 tracking-wide font-base">
+            <h1 class="text-base text-center mt-2 mb-1 tracking-wide font-NotoSerif font-light">
               {{ comic.name }}
             </h1>
-            <span class="px-3 text-xs text-neutral-content font-base">{{ comic.author }}</span>
+            <span class="px-3 text-xs text-neutral-content font-Noto">{{ comic.author }}</span>
             <div class="px-3 pb-4 mt-1 space-x-1 text-xs text-accent-content opacity-80">
               <i class="fa-solid fa-eye"></i>
               <span>{{ comic.viewCount }}</span

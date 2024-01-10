@@ -37,10 +37,12 @@ export default {
           @click="goBook(comic._id)"
         />
         <div class="card-body bg-primary rounded-b-2xl pt-4 px-4 pb-3">
-          <h1 class="font-base text-sm text-center tracking-wide sm:text-base whitespace-nowrap">
+          <h1
+            class="font-NotoSerif text-sm text-center tracking-wide sm:text-base whitespace-nowrap"
+          >
             {{ comic.name }}
           </h1>
-          <span class="text-xs font-base text-neutral-content">{{ comic.author }}</span>
+          <span class="text-xs font-Noto text-neutral-content">{{ comic.author }}</span>
           <div class="text-xs opacity-80 space-x-1 text-accent-content">
             <TheIcon type="eye" size="xs" />
             <span>{{ comic.viewCount }}</span

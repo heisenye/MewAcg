@@ -147,7 +147,7 @@ export default {
           </TheAvatar>
         </TheButton>
         <div class="mx-4 lg:mx-6 flex-1">
-          <span class="text-xl lg:text-2xl tracking-wider">{{ username }}</span>
+          <span class="text-xl lg:text-2xl tracking-wider font-Noto">{{ username }}</span>
         </div>
         <TheButton
           type="error"

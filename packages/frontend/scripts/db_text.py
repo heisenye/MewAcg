@@ -1,6 +1,11 @@
 from pymongo import MongoClient
 
-client = MongoClient('localhost', 27017)
+host = '62.234.18.221'
+port = 27017
+username = 'Heisenye'
+password = 'fanyx040419'
+
+client = MongoClient(host, port, username=username, password=password)
 db = client['acg']
 
 collections = db["comics"]

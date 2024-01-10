@@ -2,10 +2,10 @@ import os
 import string
 from fontTools import subset
 from vue_text import vue_text_set
-from db_text import db_text_set
+# from db_text import db_text_set
 # from server_text import server_text_set
 
-union_text_set = db_text_set.union(vue_text_set)
+union_text_set = vue_text_set
 union_text_set.update(map(str, range(1, 10)))
 union_text_set.update(string.ascii_lowercase)
 union_text_set.update(string.ascii_uppercase)

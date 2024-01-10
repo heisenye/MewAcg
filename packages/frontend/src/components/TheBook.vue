@@ -132,7 +132,7 @@ export default {
         />
       </div>
       <div class="card-body pt-4 md:pt-6 px-6 md:px-10 lg:px-4 rounded-b-xl xl:text-lg">
-        <h1 class="card-title text-2xl self-center pb-2 font-base font-extrabold text-white">
+        <h1 class="card-title text-2xl self-center pb-2 font-NotoSerif font-black text-white">
           {{ name }}
         </h1>
         <div class="text-accent opacity-80">
@@ -144,18 +144,18 @@ export default {
           <span>{{ chapters }}</span>
         </div>
         <div class="text-white font-base">
-          作者：<button class="btn btn-sm btn-secondary">{{ author }}</button>
+          作者：<button class="btn btn-sm btn-secondary font-Noto font-medium">{{ author }}</button>
         </div>
         <div class="space-x-1.5 text-white font-base">
           标签：
           <template v-for="tag in tags" :key="tag">
-            <TheButton type="secondary" size="sm">
+            <TheButton class="font-Noto font-medium" type="secondary" size="sm">
               {{ tag }}
             </TheButton>
           </template>
         </div>
         <div class="text-white font-base">
-          简介：<span class="opacity-80">{{ description }}</span>
+          简介：<span class="text-base-content font-Noto">{{ description }}</span>
         </div>
         <TheButton
           type="error"
