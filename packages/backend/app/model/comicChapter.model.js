@@ -53,6 +53,7 @@ comicChapterSchema.pre('save', function (next) {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
                     comicChapter = this;
+                    console.log(comicChapter);
                     return [4 /*yield*/, comic_model_1.default.updateOne({ _id: comicChapter.comicId }, { $inc: { chapters: 1 }, $set: { updatedAt: new Date() } }).exec()];
                 case 1:
                     _a.sent();
@@ -67,5 +68,5 @@ comicChapterSchema.pre('save', function (next) {
         });
     });
 });
-var ComicChapterModel = (0, mongoose_1.model)('ComicChapter', comicChapterSchema);
-exports.default = ComicChapterModel;
+var ComicChapter = (0, mongoose_1.model)('ComicChapter', comicChapterSchema);
+exports.default = ComicChapter;

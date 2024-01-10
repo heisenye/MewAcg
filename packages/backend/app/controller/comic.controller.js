@@ -302,7 +302,7 @@ var ComicController = /** @class */ (function () {
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        _a = ctx.params, comicId = _a.comicId, chapter = _a.chapter;
+                        _a = ctx.params, comicId = _a.id, chapter = _a.chapter;
                         return [4 /*yield*/, comicChapter_model_1.default.create({
                                 comicId: comicId,
                                 chapter: chapter,

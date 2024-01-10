@@ -16,7 +16,6 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
 }
 
 body {
@@ -27,8 +26,12 @@ body {
 }
 
 @supports not (color: oklch(0 0 0)) {
-  .textarea-disabled, .textarea:disabled, .textarea[disabled],
-  .btn.btn-disabled, .btn[disabled], .btn:disabled {
+  .textarea-disabled,
+  .textarea:disabled,
+  .textarea[disabled],
+  .btn.btn-disabled,
+  .btn[disabled],
+  .btn:disabled {
     opacity: 20%;
   }
   :root[data-theme='dark_'] {

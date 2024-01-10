@@ -1,6 +1,5 @@
 import { Schema, model, Document, Error, Types } from 'mongoose'
 import Comic from './comic.model'
-
 export interface IComicChapter extends Document {
   comicId: Types.ObjectId
   chapter: number
@@ -18,6 +17,7 @@ const comicChapterSchema = new Schema({
 comicChapterSchema.pre('save', async function (next) {
   try {
     const comicChapter = this
+    console.log(comicChapter)
     await Comic.updateOne(
       { _id: comicChapter.comicId },
       { $inc: { chapters: 1 }, $set: { updatedAt: new Date() } }
@@ -28,6 +28,6 @@ comicChapterSchema.pre('save', async function (next) {
   }
 })
 
-const ComicChapterModel = model<IComicChapter>('ComicChapter', comicChapterSchema)
+const ComicChapter = model<IComicChapter>('ComicChapter', comicChapterSchema)
 
-export default ComicChapterModel
+export default ComicChapter

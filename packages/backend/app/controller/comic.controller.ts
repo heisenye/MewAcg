@@ -3,7 +3,7 @@ import * as path from 'path'
 import { Context } from 'koa'
 import multer = require('@koa/multer')
 import Comic, { IComic } from '../model/comic.model'
-import ComicChapterModel, { IComicChapter } from '../model/comicChapter.model'
+import ComicChapter, { IComicChapter } from '../model/comicChapter.model'
 import Favorite from '../model/favorite.model'
 import Comment from '../model/comment.model'
 import Response from '../utils/response'
@@ -54,7 +54,7 @@ class ComicController {
 
   public async getComicImages(ctx: Context) {
     const { id, chapter } = ctx.params
-    const comicImages = await ComicChapterModel.findOne({ comicId: id, chapter: Number(chapter) })
+    const comicImages = await ComicChapter.findOne({ comicId: id, chapter: Number(chapter) })
     if (!comicImages) {
       ctx.response.status = ResponseCode.Not_Found
       ctx.body = Response.NoComic()
@@ -137,8 +137,8 @@ class ComicController {
   }
 
   public async createComicChapter(ctx: Context) {
-    const { comicId, chapter } = ctx.params
-    await ComicChapterModel.create({
+    const { id: comicId, chapter } = ctx.params
+    await ComicChapter.create({
       comicId,
       chapter,
       pages: (ctx.files as multer.File[]).length

@@ -2,13 +2,13 @@
 import { onMounted, ref, Transition } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
 import { TheButton, TheIcon, TheModal } from 'ui'
-import { http, msg, comicConstants, AlertBox, showMsg } from 'common'
+import { http, msg, comicConstants, showMsg } from 'common'
 
 const { tags, statuses } = comicConstants
 
 export default {
   name: 'ComicManagementView',
-  components: { TheButton, TheIcon, TheModal, RouterLink, AlertBox, Transition },
+  components: { TheButton, TheIcon, TheModal, RouterLink, Transition },
   setup() {
     const router = useRouter()
 

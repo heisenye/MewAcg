@@ -19,7 +19,7 @@ export default {
     const addComicImageInput = ref()
     const bulkAddComicImageInput = ref()
     const imageUrls = ref([])
-    const images = ref([])
+    const imageFiles = ref([])
     const formData = new FormData()
 
     const comicName = ref('')
@@ -105,7 +105,7 @@ export default {
     const addComicImage = (e) => {
       const image = e.target.files[0]
       if (image) {
-        images.value.push(image)
+        imageFiles.value.push(image)
         const url = URL.createObjectURL(image)
         imageUrls.value.push(url)
         e.target.value = ''
@@ -117,7 +117,7 @@ export default {
       if (images) {
         for (let i = 0; i < images.length; i++) {
           const image = images[i]
-          images.value.push(image)
+          imageFiles.value.push(image)
           const url = URL.createObjectURL(image)
           imageUrls.value.push(url)
         }
@@ -127,11 +127,11 @@ export default {
 
     const removeComicImage = (index) => {
       imageUrls.value.splice(index, 1)
-      images.value.splice(index, 1)
+      imageFiles.value.splice(index, 1)
     }
 
     const createChapter = async () => {
-      images.value.forEach((image) => {
+      imageFiles.value.forEach((image) => {
         formData.append('images', image)
       })
       const response = await http.postComicChapter({
