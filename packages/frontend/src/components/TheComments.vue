@@ -85,7 +85,7 @@ export default {
 
 <template>
   <main class="relative top-4 w-full mx-auto px-4 pb-4 card rounded max-w-3xl bg-primary">
-    <h1 class="text-xl mt-6 mb-8 text-center font-base font-black">评论</h1>
+    <h1 class="text-xl 3xl:text-2xl mt-6 mb-8 text-center font-base font-black">评论</h1>
     <RouterLink
       v-if="!token"
       :to="{ name: 'login' }"
@@ -99,7 +99,7 @@ export default {
         v-model="inputComment"
         placeholder="输入评论"
         rows="3"
-        class="textarea textarea-secondary block mx-auto max-w-lg w-full mb-4 text-accent-content"
+        class="textarea textarea-secondary block mx-auto max-w-lg w-full mb-4 text-accent-content 3xl:placeholder:text-base"
       ></textarea>
     </div>
     <TheButton
@@ -119,10 +119,10 @@ export default {
         <TheButton
           type="info"
           shape="circle"
-          class="shadow-md shadow-info"
+          class="shadow-md shadow-info 3xl:btn-lg"
           @click="scrollToCommentInputEl"
         >
-          <TheIcon type="arrow-up" />
+          <TheIcon type="arrow-up" class="3xl:text-xl" />
         </TheButton>
       </div>
     </Transition>

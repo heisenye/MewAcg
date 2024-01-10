@@ -39,7 +39,7 @@ export default {
           class="text-white btn btn-ghost tracking-wider font-medium text-lg px-4"
           @click="goBack"
         >
-          <span class="text-xl 2xl:text-2xl 2xl:tracking-wider">&lt;&nbsp;&nbsp;Back</span>
+          <span class="router-text">&lt;&nbsp;&nbsp;Back</span>
         </div>
       </template>
       <template #right>
@@ -50,11 +50,11 @@ export default {
         <TheButton type="ghost" size="md" shape="circle" class="lg:hidden btn-md text-white">
           <TheIcon
             type="magnifying-glass"
-            class="text-base sm:text-lg xl:text-xl 2xl:text-2xl lg:hidden"
+            class="text-base sm:text-lg xl:text-xl 3xl:text-2xl lg:hidden"
           />
         </TheButton>
         <TheButton type="ghost" size="md" shape="circle" class="btn-md text-white" @click="goHome">
-          <TheIcon type="house" class="text-base sm:text-lg xl:text-xl 2xl:text-2xl" />
+          <TheIcon type="house" size="base" class="router-icon" />
         </TheButton>
       </template>
     </TheNavigation>

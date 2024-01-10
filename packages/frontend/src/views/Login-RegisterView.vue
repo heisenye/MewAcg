@@ -111,7 +111,7 @@ export default {
           </TheButton>
           <span v-if="isLogin" class="text-lg md:text-xl">登入 MewAcg</span>
           <span v-else class="text-lg md:text-xl">注册 MewAcg</span>
-          <TheButton type="accent" size="sm" shape="circle" class="text-white">
+          <TheButton type="neutral" size="sm" shape="circle" class="text-white">
             <i
               class="fa-solid text-base"
               :class="{ 'fa-lock': !isSuccess, 'fa-lock-open': isSuccess }"
@@ -130,7 +130,7 @@ export default {
               v-model="username"
               type="text"
               placeholder="用户名"
-              class="input input-bordered bg-secondary border-accent focus:border-info lg:text-lg lg:py-6 font-Noto"
+              class="input input-accent bg-secondary lg:text-lg lg:py-6 font-Noto"
             />
           </div>
           <div class="form-control">
@@ -144,7 +144,7 @@ export default {
               v-model="pwd"
               type="password"
               placeholder="密码"
-              class="input input-bordered bg-secondary border-accent focus:border-info lg:text-lg lg:py-6 font-Noto"
+              class="input input-accent bg-secondary lg:text-lg lg:py-6 font-Noto"
             />
           </div>
           <div class="form-control" v-if="!isLogin">

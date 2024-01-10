@@ -1,6 +1,6 @@
 <script>
 import { onMounted, ref, watch, toRefs } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, RouterLink } from 'vue-router'
 import TheComments from '@/components/TheComments.vue'
 import { getFavorite, deleteFavorite, postFavorite } from '@/utils/http.js'
 import { TheButton, TheIcon, TheImage, TheModal } from 'ui'
@@ -8,7 +8,7 @@ import { useToken, showMsg, msg, BASE_URL } from 'common'
 
 export default {
   name: 'TheBook',
-  components: { TheComments, TheButton, TheIcon, TheImage, TheModal },
+  components: { TheComments, TheButton, TheIcon, TheImage, TheModal, RouterLink },
   props: {
     comic: {
       type: Object,
@@ -48,7 +48,7 @@ export default {
         return
       }
       const response = await getFavorite(id)
-      if (response.data) {
+      if (response && response.data) {
         isFavorited.value = true
       }
     })
@@ -113,7 +113,7 @@ export default {
 </script>
 
 <template>
-  <main class="relative w-full top-20 px-3 sm:px-4 md:px-8 lg:px-4 pb-8">
+  <main class="relative w-full top-20 px-3 sm:px-4 md:px-8 lg:px-6 pb-8">
     <div class="relative w-full mx-auto card rounded max-w-3xl bg-primary lg:card-side lg:py-4">
       <div
         class="absolute bookmark border-[32px] -left-4 -top-4 xl:border-[40px]"
@@ -168,7 +168,7 @@ export default {
             :variant="isFavorited ? 'solid' : 'regular'"
           />
         </TheButton>
-        <h3 class="font-base text-lg mx-auto">章节</h3>
+        <h3 class="font-base text-lg 3xl:text-xl mx-auto">章节</h3>
         <div>
           <TheButton
             type="secondary"

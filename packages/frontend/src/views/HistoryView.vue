@@ -1,5 +1,5 @@
 <script>
-import { onMounted, ref, watchEffect } from 'vue'
+import { onMounted, ref } from 'vue'
 import { goBook } from '@/utils/router'
 import useHistory from '@/utils/useHistory.js'
 import { getHistoryComics } from '@/utils/http.js'
@@ -11,16 +11,14 @@ export default {
   methods: { goBook },
   components: { TheImage, TheIcon },
   setup() {
-    const { history } = useHistory
-
+    const { history, removeHistoryFromStorage } = useHistory
     const isRequestComplete = ref(false)
 
     const historyComics = ref([])
-    watchEffect(() => {
-      historyComics.value = historyComics.value.filter((comic) => {
-        return history.value.includes(comic._id)
-      })
-    })
+    const removeHistoryComic = (id) => {
+      removeHistoryFromStorage(id)
+      historyComics.value = historyComics.value.filter((comic) => comic._id !== id)
+    }
 
     onMounted(async () => {
       const response = await getHistoryComics(history.value)
@@ -35,7 +33,7 @@ export default {
 
     return {
       BASE_URL,
-      useHistory,
+      removeHistoryComic,
       historyComics,
       isRequestComplete
     }
@@ -58,7 +56,7 @@ export default {
         <TheIcon
           type="circle-xmark"
           class="indicator-item right-3 cursor-pointer fa-solid text-error"
-          @click="useHistory.removeHistoryFromStorage(comic._id)"
+          @click="removeHistoryComic(comic._id)"
         />
         <div
           class="card-body text-center bg-primary rounded-b-2xl font-base py-6 px-0 whitespace-nowrap"

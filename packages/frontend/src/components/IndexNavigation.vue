@@ -119,7 +119,7 @@ export default {
           :to="{ name: 'home' }"
           class="relative btn btn-ghost tracking-wider font-medium rounded-lg font-Poppins normal-case overflow-hidden after:splash active:after:splash-active text-white"
         >
-          <span class="text-xl 3xl:text-2xl 3xl:tracking-wider"> MewAcg </span>
+          <span class="router-text"> MewAcg </span>
         </RouterLink>
       </template>
       <template #right>
@@ -162,7 +162,7 @@ export default {
           :transition="true"
           class="before:text-sm md:text-md text-white"
         >
-          <TheIcon type="bell" size="lg" class="2xl:text-xl 3xl:text-2xl" />
+          <TheIcon type="bell" class="router-icon" />
         </TheButton>
         <TheButton
           type="ghost"
