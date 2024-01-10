@@ -12,7 +12,7 @@ export default {
 </script>
 
 <template>
-  <transition name="component" mode="out-in">
+  <transition name="nav" mode="out-in">
     <IndexNavigation v-if="$route.meta.showNav" class="z-50" />
   </transition>
   <RouterView v-slot="{ Component }">
@@ -27,11 +27,20 @@ export default {
 <style scoped>
 .component-enter-active,
 .component-leave-active {
-  transition: opacity ease-in-out 0.15s;
+  transition: opacity ease-out 0.2s;
 }
 
 .component-enter-from,
 .component-leave-to {
+  opacity: 0;
+}
+.nav-enter-active,
+.nav-leave-active {
+  transition: opacity ease-in 0.3s;
+}
+
+.nav-enter-from,
+.nav-leave-to {
   opacity: 0;
 }
 </style>

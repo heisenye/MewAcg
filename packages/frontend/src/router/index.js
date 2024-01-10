@@ -159,13 +159,18 @@ const router = createRouter({
         }) //Promise
       }
     } else {
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          resolve({
-            top: 0
-          }) //resolve
-        }, 120) //setTimeout
-      }) //Promise
+      return {
+        top: 0,
+        behavior: 'smooth'
+      }
+      // return new Promise((resolve) => {
+      //   setTimeout(() => {
+      //     resolve({
+      //       top: 0,
+      //       behavior: 'smooth'
+      //     }) //resolve
+      //   }, 50) //setTimeout
+      // }) //Promise
     }
   }
 })

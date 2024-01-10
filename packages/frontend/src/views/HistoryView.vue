@@ -59,7 +59,7 @@ export default {
           @click="removeHistoryComic(comic._id)"
         />
         <div
-          class="card-body text-center bg-primary rounded-b-2xl font-NotoSerif py-6 px-0 whitespace-nowrap"
+          class="card-body text-center bg-primary rounded-b-2xl py-6 px-0 whitespace-nowrap font-bold font-NotoSerif"
         >
           {{ comic.name }}
         </div>

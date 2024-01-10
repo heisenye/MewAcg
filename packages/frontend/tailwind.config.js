@@ -54,7 +54,7 @@ module.exports = {
 
           secondary: 'rgb(82, 82, 82)',
 
-          'secondary-content': 'rgb(231 229 228)',
+          'secondary-content': 'rgb(212 212 212)',
 
           accent: 'rgb(199 210 254)',
 
@@ -62,7 +62,7 @@ module.exports = {
 
           neutral: 'rgb(100 116 139)',
 
-          'neutral-content': "rgb(214 211 209)",
+          'neutral-content': "rgb(168 162 158)",
 
           info: 'rgb(96 165 250)',
 

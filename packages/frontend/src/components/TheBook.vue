@@ -144,18 +144,18 @@ export default {
           <span>{{ chapters }}</span>
         </div>
         <div class="text-white font-base">
-          作者：<button class="btn btn-sm btn-secondary font-Noto font-medium">{{ author }}</button>
+          作者：<button class="btn btn-sm btn-secondary font-Noto">{{ author }}</button>
         </div>
         <div class="space-x-1.5 text-white font-base">
           标签：
           <template v-for="tag in tags" :key="tag">
-            <TheButton class="font-Noto font-medium" type="secondary" size="sm">
+            <TheButton class="font-Noto" type="secondary" size="sm">
               {{ tag }}
             </TheButton>
           </template>
         </div>
         <div class="text-white font-base">
-          简介：<span class="text-base-content font-Noto">{{ description }}</span>
+          简介：<span class="text-base-content font-NotoSerif">{{ description }}</span>
         </div>
         <TheButton
           type="error"
