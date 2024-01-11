@@ -207,6 +207,8 @@ export default {
 
 <template>
   <main>
+
+<!--    nav-->
     <TheNavigation class="z-50">
       <template #left>
         <div
@@ -217,11 +219,16 @@ export default {
         </div>
       </template>
     </TheNavigation>
+<!--    nav-->
+
+
     <div class="absolute top-20 w-full px-4" v-if="selectedComic">
       <div
         class="navbar min-h-0 max-w-4xl w-full mx-auto bg-base-200 rounded-lg flex-col space-y-4 px-6"
       >
-        <!--    name   -->
+
+
+<!--        name-->
         <div class="w-full pl-4">
           <span class="mr-auto text-lg 2xl:text-xl">名字</span>
           <span class="text-lg mx-auto">{{ selectedComic.name }}</span>
@@ -233,7 +240,7 @@ export default {
           >
             <TheIcon type="pencil" size="lg" />
           </TheButton>
-          <!--     modal     -->
+<!--          nameModal-->
           <TheModal id="name">
             <input type="text" class="input input-info mx-auto block" v-model="comicName" />
             <form method="dialog">
@@ -245,10 +252,13 @@ export default {
               >
             </form>
           </TheModal>
+<!--          nameModal-->
         </div>
-        <!--    name   -->
+<!--        name-->
+
+
         <div class="divider divider-primary"></div>
-        <!--    author      -->
+<!--        author-->
         <div class="w-full pl-4">
           <span class="mr-auto text-lg 2xl:text-xl">作者</span>
           <span class="text-lg mx-auto">{{ selectedComic.author }}</span>
@@ -260,7 +270,7 @@ export default {
           >
             <TheIcon type="pencil" size="lg" />
           </TheButton>
-          <!--     modal     -->
+<!--          authorModal-->
           <TheModal id="author">
             <input type="text" class="input input-info mx-auto block" v-model="comicAuthor" />
             <form method="dialog">
@@ -272,10 +282,13 @@ export default {
               >
             </form>
           </TheModal>
+<!--          authorModal-->
         </div>
         <!--    author      -->
+
+
         <div class="divider divider-primary"></div>
-        <!--     status     -->
+<!--        status-->
         <div class="w-full pl-4">
           <span class="mr-auto text-lg 2xl:text-xl">状态</span>
           <span class="text-lg mx-auto">{{
@@ -289,7 +302,9 @@ export default {
           >
             <TheIcon type="pencil" size="lg" />
           </TheButton>
-          <!--      modal    -->
+<!--          statusModal-->
+
+
           <TheModal id="status">
             <select class="select select-bordered block mx-auto" required v-model="comicStatus">
               <option disabled selected value="">状态</option>
@@ -308,9 +323,13 @@ export default {
               >
             </form>
           </TheModal>
+<!--          statusModal-->
         </div>
-        <!--     status     -->
+<!--        status-->
+
+
         <div class="divider divider-primary"></div>
+<!--        description-->
         <div class="w-full pl-4">
           <span class="mr-auto text-lg 2xl:text-xl">简介</span>
           <span class="text-sm mx-auto text-center">{{ selectedComic.description }}</span>
@@ -322,6 +341,9 @@ export default {
           >
             <TheIcon type="pencil" size="lg" />
           </TheButton>
+
+
+<!--          descriptionModal-->
           <TheModal id="description">
             <textarea
               class="textarea textarea-primary mx-auto block"
@@ -338,7 +360,11 @@ export default {
               >
             </form>
           </TheModal>
+<!--          descriptionModal-->
         </div>
+<!--        description-->
+
+
         <div class="divider divider-primary"></div>
         <!--     tags     -->
         <div class="w-full pl-4">
@@ -354,7 +380,9 @@ export default {
           >
             <TheIcon type="pencil" size="lg" />
           </TheButton>
-          <!--     modal     -->
+<!--          tagsModal-->
+
+
           <TheModal id="tags">
             <div class="grid grid-cols-3 gap-2">
               <template v-for="tag in tags" :key="tag">
@@ -378,10 +406,13 @@ export default {
               >
             </form>
           </TheModal>
+<!--          tagsModal-->
         </div>
         <!--     tags     -->
+
+
         <div class="divider divider-primary"></div>
-        <!--     cover      -->
+<!--        cover-->
         <div v-if="selectedComic.coverImage" class="w-full pl-4">
           <span class="mr-auto text-lg 2xl:text-xl whitespace-nowrap">封面</span>
           <div class="px-8 max-w-screen-xs">
@@ -400,8 +431,12 @@ export default {
           >
             <TheIcon type="pencil" size="lg" />
           </TheButton>
+
+
+<!--          coverModal-->
           <TheModal id="coverImage">
             <div class="w-full grid grid-cols-3 gap-4">
+<!--              template-->
               <template v-for="chapter in selectedComic.chapters" :key="chapter">
                 <TheButton
                   type="ghost"
@@ -438,11 +473,16 @@ export default {
                   </form>
                 </TheModal>
               </template>
+<!--              template-->
             </div>
           </TheModal>
+<!--          coverModal-->
         </div>
-        <!--     cover      -->
+<!--        cover-->
+
+
         <div class="divider divider-primary"></div>
+<!--        chapters-->
         <div class="w-full pl-4">
           <span class="mr-auto text-lg 2xl:text-xl">章节数</span>
           <span class="text-xl mx-auto">
@@ -456,8 +496,13 @@ export default {
           >
             <TheIcon type="eye" size="lg" />
           </TheButton>
+
+
+<!--          chaptersModal-->
           <TheModal id="viewChaptersModal">
-            <div class="w-full grid grid-cols-3 gap-4">
+            <div class="w-full grid grid-cols-3 place-items-center gap-4">
+
+<!--              template v-for-->
               <template v-for="i in selectedComic.chapters" :key="i">
                 <div class="indicator w-full">
                   <TheIcon
@@ -469,13 +514,27 @@ export default {
                   <TheButton
                     type="ghost"
                     class="bg-primary-content w-full"
-                    onclick="document.getElementById('viewChapterModal').showModal()"
+                    onclick="document.getElementById('viewChapterImagesModal').showModal()"
                     @click="viewChapter(i)"
                     >{{ i }}
                   </TheButton>
                 </div>
               </template>
-              <TheModal id="viewChapterModal">
+<!--              template v-for-->
+              <TheButton
+                type="info"
+                size="md"
+                shape="circle"
+                class="hover:shadow-2xl"
+                onclick="document.getElementById('newChapter').showModal()"
+                @click="imageUrls.length = 0"
+              >
+                <TheIcon type="plus" />
+              </TheButton>
+
+
+<!--              chapterImagesModal-->
+              <TheModal id="viewChapterImagesModal">
                 <div class="w-full mt-4 px-4 grid grid-cols-3 gap-4">
                   <div v-for="(image, index) in imageUrls" :key="index" class="relative rounded-lg">
                     <TheButton
@@ -490,7 +549,10 @@ export default {
                   </div>
                 </div>
               </TheModal>
+<!--              chapterImagesModal-->
             </div>
+
+
             <div v-if="!selectedComic.chapters" class="flex items-center place-items-center px-4">
               <span class="text-lg">当前无章节</span>
               <TheButton
@@ -503,69 +565,74 @@ export default {
                 <TheIcon type="plus" size="xl" class="text-white" />
               </TheButton>
             </div>
-            <TheModal id="newChapter">
-              <h1 class="text-center text-lg">第{{ selectedComic.chapters + 1 }}章</h1>
-              <div class="w-full mt-4 px-4 grid grid-cols-3 gap-4">
-                <div v-for="(image, index) in imageUrls" :key="index" class="relative rounded-lg">
-                  <TheButton
-                    type="error"
-                    shape="circle"
-                    class="absolute sm:w-6 sm:h-6 -right-1 -top-1"
-                    @click="removeComicImage(index)"
-                  >
-                    <TheIcon type="xmark" size="sm" class="text-white" />
-                  </TheButton>
-                  <img :src="image" alt="" class="object-cover object-center rounded-lg" />
-                </div>
-                <div
-                  class="text-center aspect-3/4 rounded-lg bg-base-300 flex justify-center items-center"
-                >
-                  <TheButton
-                    type="ghost"
-                    size="md"
-                    shape="circle"
-                    class="z-10"
-                    @click="addComicImageInput.click()"
-                  >
-                    <TheIcon type="plus" size="xl" class="text-white" />
-                  </TheButton>
-                  <input
-                    type="file"
-                    class="absolute hidden"
-                    @change="addComicImage"
-                    ref="addComicImageInput"
-                  />
-                </div>
-                <div
-                  class="text-center aspect-3/4 rounded-lg bg-base-300 flex justify-center items-center"
-                >
-                  <TheButton
-                    type="ghost"
-                    size="md"
-                    shape="circle"
-                    class="z-10"
-                    @click="bulkAddComicImageInput.click()"
-                  >
-                    <TheIcon type="folder-plus" size="xl" class="text-white" />
-                  </TheButton>
-                  <input
-                    type="file"
-                    multiple
-                    class="absolute hidden"
-                    @change="bulkAddComicImage"
-                    ref="bulkAddComicImageInput"
-                  />
-                </div>
-              </div>
-              <div class="flex justify-center">
-                <TheButton type="primary" class="relative mt-4" @click="createChapter"
-                  >上传</TheButton
-                >
-              </div>
-            </TheModal>
           </TheModal>
         </div>
       </div>
+<!--      chapters-->
+
+<!--      newChapterModal-->
+      <TheModal id="newChapter">
+        <h1 class="text-center text-lg">第{{ selectedComic.chapters + 1 }}章</h1>
+        <div class="w-full mt-4 px-4 grid grid-cols-3 gap-4">
+          <div v-for="(image, index) in imageUrls" :key="index" class="relative rounded-lg">
+            <TheButton
+              type="error"
+              shape="circle"
+              class="absolute sm:w-6 sm:h-6 -right-1 -top-1"
+              @click="removeComicImage(index)"
+            >
+              <TheIcon type="xmark" size="sm" class="text-white" />
+            </TheButton>
+            <img :src="image" alt="" class="object-cover object-center rounded-lg" />
+          </div>
+          <div
+            class="text-center aspect-3/4 rounded-lg bg-base-300 flex justify-center items-center"
+          >
+            <TheButton
+              type="ghost"
+              size="md"
+              shape="circle"
+              class="z-10"
+              @click="addComicImageInput.click()"
+            >
+              <TheIcon type="plus" size="xl" class="text-white" />
+            </TheButton>
+            <input
+              type="file"
+              class="absolute hidden"
+              @change="addComicImage"
+              ref="addComicImageInput"
+            />
+          </div>
+          <div
+            class="text-center aspect-3/4 rounded-lg bg-base-300 flex justify-center items-center"
+          >
+            <TheButton
+              type="ghost"
+              size="md"
+              shape="circle"
+              class="z-10"
+              @click="bulkAddComicImageInput.click()"
+            >
+              <TheIcon type="folder-plus" size="xl" class="text-white" />
+            </TheButton>
+            <input
+              type="file"
+              multiple
+              class="absolute hidden"
+              @change="bulkAddComicImage"
+              ref="bulkAddComicImageInput"
+            />
+          </div>
+        </div>
+        <div class="flex justify-center">
+          <TheButton type="primary" class="relative mt-4" @click="createChapter"
+          >上传</TheButton
+          >
+        </div>
+      </TheModal>
+<!--      newChapterModal-->
+
       <div class="max-w-xl w-full flex justify-evenly mt-6 mx-auto">
         <TheButton type="success"> 存儲 </TheButton>
         <TheButton type="error" @click="removeComic"> 刪除 </TheButton>

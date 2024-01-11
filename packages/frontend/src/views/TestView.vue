@@ -11,6 +11,7 @@ export default {
 
 <template>
   <TheComicRow/>
+  <button class="[@media(hover:hover)]:bg-secondary">123</button>
 </template>
 
 <style scoped></style>

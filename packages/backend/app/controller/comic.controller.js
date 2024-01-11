@@ -278,18 +278,24 @@ var ComicController = /** @class */ (function () {
     };
     ComicController.prototype.getSearchComics = function (ctx) {
         return __awaiter(this, void 0, void 0, function () {
-            var keyword, searchComics;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            var _a, name, tag, searchComics_1, searchComics;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
                     case 0:
-                        keyword = ctx.query.keyword;
-                        if (!keyword) {
+                        _a = ctx.query, name = _a.name, tag = _a.tag;
+                        if (!name && !tag) {
                             ctx.body = response_1.default.Success({ data: [] });
                             return [2 /*return*/];
                         }
-                        return [4 /*yield*/, comic_model_1.default.find({ name: { $regex: keyword, $options: 'i' } })];
+                        if (!tag) return [3 /*break*/, 2];
+                        return [4 /*yield*/, comic_model_1.default.find({ tags: { $in: [tag] } })];
                     case 1:
-                        searchComics = _a.sent();
+                        searchComics_1 = _b.sent();
+                        ctx.body = response_1.default.Success({ data: searchComics_1 });
+                        return [2 /*return*/];
+                    case 2: return [4 /*yield*/, comic_model_1.default.find({ name: { $regex: name, $options: 'i' } })];
+                    case 3:
+                        searchComics = _b.sent();
                         ctx.body = response_1.default.Success({ data: searchComics });
                         return [2 /*return*/];
                 }

@@ -28,7 +28,7 @@ export default {
     <div class="w-full whitespace-nowrap overflow-x-scroll">
       <template v-for="comic in comicList" :key="comic._id">
         <div
-          class="relative w-5/12 md:w-1/3 lg:w-1/4 xl:w-1/5 box-border inline-flex flex-col overflow-hidden align-top px-2.5"
+          class="relative inline-flex flex-col align-top w-5/12 [@media(any-hover:hover)]:w-1/2 md:w-1/3 md:[@media(any-hover:hover)]:w-1/3 lg:w-1/4 lg:[@media(any-hover:hover)]:w-1/4 xl:w-1/5 xl:[@media(any-hover:hover)]:w-1/5 [@media(any-hover:hover)]:px-4 md:[@media(any-hover:hover)]:px-2.5 px-2.5 box-border overflow-hidden"
         >
           <div class="relative w-full align-top rounded-t-2xl overflow-hidden">
             <TheImage
@@ -40,7 +40,7 @@ export default {
             />
           </div>
           <div class="relative w-full bg-primary rounded-b-2xl">
-            <h1 class="text-base text-center mt-2 mb-1 tracking-wide font-NotoSerif font-bold">
+            <h1 class="text-base text-center mt-3 mb-1 tracking-wide font-NotoSerif font-bold">
               {{ comic.name }}
             </h1>
             <span class="px-3 text-xs text-neutral-content font-Noto font-bold">{{

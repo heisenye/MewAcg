@@ -154,11 +154,13 @@ export function postAvatar(data) {
   }).catch(blankCb)
 }
 
-export function getSearch(keyword) {
-  if (!keyword) {
-    return
-  }
-  const query = `keyword=${keyword}`
+export function getSearch(keyword, type = 'name') {
+  if (!keyword) return
+  let query
+
+  if (type === 'tag') query = `tag=${keyword}`
+  else query = `name=${keyword}`
+
   return request(
     {
       method: 'GET',

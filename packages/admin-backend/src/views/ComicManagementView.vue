@@ -181,7 +181,6 @@ export default {
     <!--  addButton  -->
     <TheButton
       class="fixed right-4 bottom-4 hover:shadow-2xl"
-      type="info"
       shape="circle"
       size="lg"
       onclick="document.getElementById('newComicModal').showModal()"

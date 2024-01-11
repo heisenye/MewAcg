@@ -40,8 +40,8 @@ export const goSearch = () => {
   router.push({ name: 'search' })
 }
 
-export const goSearchResult = (keyword) => {
-  router.push({ name: 'search', query: { keyword: keyword } })
+export const goSearchResult = (keyword, type = 'name') => {
+  router.push({ name: 'search', query: { [type]: keyword } })
 }
 
 export const goSearchResultWithPage = (keyword, page) => {

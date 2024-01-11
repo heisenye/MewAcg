@@ -12,7 +12,7 @@ export default {
   components: { TheImage, TheIcon },
   setup() {
     const { history, removeHistoryFromStorage } = useHistory
-    const isRequestComplete = ref(false)
+    const isRequestCompleted = ref(false)
 
     const historyComics = ref([])
     const removeHistoryComic = (id) => {
@@ -28,25 +28,25 @@ export default {
           return history.value.indexOf(b._id) - history.value.indexOf(a._id)
         })
       }
-      isRequestComplete.value = true
+      isRequestCompleted.value = true
     })
 
     return {
       BASE_URL,
       removeHistoryComic,
       historyComics,
-      isRequestComplete
+      isRequestCompleted
     }
   }
 }
 </script>
 
 <template>
-  <main
-    class="relative top-40 mx-auto w-full max-w-screen-2xl min-w-[300px] px-1 space-y-4 text-white"
-  >
-    <template v-if="historyComics.length !== 0" v-for="comic in historyComics" :key="comic._id">
-      <div class="w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 card inline-flex px-4 md:px-3 lg:px-2 indicator">
+  <main class="relative top-40 mx-auto w-full max-w-screen-2xl min-w-[300px] px-1 text-white">
+    <template v-for="comic in historyComics" :key="comic._id">
+      <div
+        class="w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 card inline-flex mb-4 px-4 md:px-3 lg:px-2 indicator align-top"
+      >
         <TheImage
           :blur="false"
           class="cursor-pointer"
@@ -66,7 +66,7 @@ export default {
       </div>
     </template>
     <h1
-      v-if="isRequestComplete && historyComics.length === 0"
+      v-if="isRequestCompleted && historyComics.length === 0"
       class="relative top-20 text-lg text-center font-base font-black"
     >
       当前未观看漫画哦

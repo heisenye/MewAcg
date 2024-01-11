@@ -5,9 +5,11 @@ import TheComments from '@/components/TheComments.vue'
 import { getFavorite, deleteFavorite, postFavorite } from '@/utils/http.js'
 import { TheButton, TheIcon, TheImage, TheModal } from 'ui'
 import { useToken, showMsg, msg, BASE_URL } from 'common'
+import { goSearchResult } from '@/utils/router.js'
 
 export default {
   name: 'TheBook',
+  methods: { goSearchResult },
   components: { TheComments, TheButton, TheIcon, TheImage, TheModal, RouterLink },
   props: {
     comic: {
@@ -149,7 +151,12 @@ export default {
         <div class="space-x-1.5 text-white font-base">
           标签：
           <template v-for="tag in tags" :key="tag">
-            <TheButton class="font-Noto" type="secondary" size="sm">
+            <TheButton
+              class="font-Noto"
+              type="secondary"
+              size="sm"
+              @click="goSearchResult(tag, 'tag')"
+            >
               {{ tag }}
             </TheButton>
           </template>
@@ -168,21 +175,21 @@ export default {
             :variant="isFavorited ? 'solid' : 'regular'"
           />
         </TheButton>
-        <h3 class="font-base text-lg 3xl:text-xl mx-auto">章节</h3>
+        <h3 class="text-xl 3xl:text-2xl mx-auto font-base font-black">章节</h3>
         <div>
           <TheButton
             type="secondary"
             size="sm"
             shape="square"
             class="block mx-auto"
-            onclick="document.getElementById('settings').showModal()"
+            onclick="document.getElementById('settingsModal').showModal()"
           >
             <TheIcon type="gear" class="text-success" />
           </TheButton>
         </div>
-        <TheModal id="settings" class="bg-primary font-base">
+        <TheModal id="settingsModal" class="bg-primary font-base">
           <div class="flex items-center">
-            <label for="progress" class="mr-6">是否记忆阅读进度</label>
+            <label for="progress" class="mr-6 3xl:text-lg">是否记忆阅读进度</label>
             <input
               type="checkbox"
               id="progress"
