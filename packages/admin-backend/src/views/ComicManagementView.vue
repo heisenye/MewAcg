@@ -1,8 +1,9 @@
 <script>
 import { onMounted, ref, Transition } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
+import { postComic, getSearch, getComicsWithoutCache } from '@/utils/http.js'
 import { TheButton, TheIcon, TheModal } from 'ui'
-import { http, msg, comicConstants, showMsg } from 'common'
+import { msg, comicConstants, showMsg } from 'common'
 
 const { tags, statuses } = comicConstants
 
@@ -42,7 +43,7 @@ export default {
           return
         }
       }
-      const response = await http.postComic(data)
+      const response = await postComic(data)
       if (response && response.code === 200) {
         document.getElementById('newComicModal').close()
         showMsg({
@@ -63,13 +64,13 @@ export default {
 
     const searchComic = async () => {
       if (keyword.value.trim() === '') return
-      const response = await http.getSearch(keyword.value.trim())
+      const response = await getSearch(keyword.value.trim())
       foundComics.value = response.data
     }
 
     onMounted(async () => {
-      comicsCount.value = (await http.getComicsWithoutCache()).data.length
-      unfilledComics.value = (await http.getComicsWithoutCache()).data.filter(
+      comicsCount.value = (await getComicsWithoutCache()).data.length
+      unfilledComics.value = (await getComicsWithoutCache()).data.filter(
         (comic) => comic.chapters === 0
       )
       unfilledComicsCount.value = unfilledComics.value.length

@@ -38,11 +38,11 @@ export default {
         />
         <div class="card-body bg-primary rounded-b-2xl pt-4 px-4 pb-3">
           <h1
-            class="font-NotoSerif text-sm text-center tracking-wide sm:text-base whitespace-nowrap"
+            class="text-base text-center tracking-wide font-NotoSerif font-black whitespace-nowrap"
           >
             {{ comic.name }}
           </h1>
-          <span class="text-xs font-Noto text-neutral-content">{{ comic.author }}</span>
+          <span class="text-xs text-neutral-content font-Noto font-black">{{ comic.author }}</span>
           <div class="text-xs opacity-80 space-x-1 text-accent-content">
             <TheIcon type="eye" size="xs" />
             <span>{{ comic.viewCount }}</span

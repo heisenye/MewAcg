@@ -278,12 +278,12 @@ var ComicController = /** @class */ (function () {
     };
     ComicController.prototype.getSearchComics = function (ctx) {
         return __awaiter(this, void 0, void 0, function () {
-            var _a, name, tag, searchComics_1, searchComics;
+            var _a, name, tag, author, searchComics_1, searchComics_2, searchComics;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        _a = ctx.query, name = _a.name, tag = _a.tag;
-                        if (!name && !tag) {
+                        _a = ctx.query, name = _a.name, tag = _a.tag, author = _a.author;
+                        if (!name && !tag && !author) {
                             ctx.body = response_1.default.Success({ data: [] });
                             return [2 /*return*/];
                         }
@@ -293,8 +293,15 @@ var ComicController = /** @class */ (function () {
                         searchComics_1 = _b.sent();
                         ctx.body = response_1.default.Success({ data: searchComics_1 });
                         return [2 /*return*/];
-                    case 2: return [4 /*yield*/, comic_model_1.default.find({ name: { $regex: name, $options: 'i' } })];
+                    case 2:
+                        if (!author) return [3 /*break*/, 4];
+                        return [4 /*yield*/, comic_model_1.default.find({ author: { $regex: author, $options: 'i' } })];
                     case 3:
+                        searchComics_2 = _b.sent();
+                        ctx.body = response_1.default.Success({ data: searchComics_2 });
+                        return [2 /*return*/];
+                    case 4: return [4 /*yield*/, comic_model_1.default.find({ name: { $regex: name, $options: 'i' } })];
+                    case 5:
                         searchComics = _b.sent();
                         ctx.body = response_1.default.Success({ data: searchComics });
                         return [2 /*return*/];

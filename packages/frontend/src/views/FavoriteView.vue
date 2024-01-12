@@ -10,7 +10,7 @@ export default {
   name: 'FavoriteView',
   components: { TheComics, TheImage },
   setup() {
-    const isQuestComplete = ref(false)
+    const isRequestCompleted = ref(false)
 
     const favoriteComics = ref([])
     onMounted(async () => {
@@ -18,12 +18,12 @@ export default {
       if (response.code === 200) {
         favoriteComics.value = response.data
       }
-      isQuestComplete.value = true
+      isRequestCompleted.value = true
     })
     return {
       BASE_URL,
       favoriteComics,
-      isQuestComplete,
+      isRequestCompleted,
 
       goBook
     }
@@ -33,7 +33,7 @@ export default {
 
 <template>
   <TheComics
-    v-if="isQuestComplete"
+    v-if="isRequestCompleted"
     class="top-40"
     empty-list-msg="当前未收藏漫画哦"
     :comic-list="favoriteComics"

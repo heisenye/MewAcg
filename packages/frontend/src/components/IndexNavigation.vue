@@ -17,7 +17,7 @@ const links = [
 
 export default {
   name: 'IndexNavigation',
-  components: { TheButton, TheIcon, TheNavigation, RouterLink, TheAvatar },
+  components: { TheButton, TheIcon, TheNavigation, TheAvatar, RouterLink },
   setup() {
     const route = useRoute()
     const { token } = useToken
@@ -67,7 +67,7 @@ export default {
       })
     })
 
-    const searchFn = () => {
+    const searchHandler = () => {
       if (keyword.value.trim()) {
         goSearchResult(keyword.value)
       }
@@ -85,7 +85,7 @@ export default {
       goLogin,
       goProfile,
       goSearch,
-      searchFn
+      searchHandler
     }
   }
 }
@@ -128,7 +128,7 @@ export default {
             type="text"
             placeholder="搜索标题或标签"
             class="nav-input"
-            @keyup.enter="searchFn"
+            @keyup.enter="searchHandler"
             v-model="keyword"
           />
           <TheIcon type="magnifying-glass" class="absolute left-4 3xl:text-lg text-accent" />
@@ -143,7 +143,7 @@ export default {
               type="arrow-right"
               class="text-base"
               :class="{ 'text-white': !isSearchDisabled }"
-              @click="searchFn"
+              @click="searchHandler"
             />
           </TheButton>
         </div>

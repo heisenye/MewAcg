@@ -23,14 +23,21 @@ export default {
 
 <template>
   <main
-    class="absolute w-full max-w-screen-2xl min-w-[300px] left-1/2 -translate-x-1/2 px-1 text-white"
+    class="relative w-full max-w-screen-2xl min-w-[300px] mx-auto [@media(any-hover:hover)]:px-6 [@media(any-hover:none)]:px-1.5 text-white"
   >
-    <div class="w-full whitespace-nowrap overflow-x-scroll">
+    <div
+      class="w-full whitespace-nowrap overflow-x-scroll [@media(any-hover:hover)]:grid [@media(any-hover:hover)]:grid-rows-2 [@media(any-hover:hover)]:grid-cols-3 [@media(any-hover:hover)]:lg:grid-cols-4 [@media(any-hover:hover)]:xl:grid-cols-5 [@media(any-hover:hover)]:gap-y-4 [@media(any-hover:hover)]:gap-x-4 @media:(any-hover:none):md:gap-x-6"
+    >
       <template v-for="comic in comicList" :key="comic._id">
+        <!--        <div-->
+        <!--          class="relative inline-flex flex-col align-top w-5/12 [@media(any-hover:hover)]:w-1/3 md:w-1/3 md:[@media(any-hover:hover)]:w-1/3 lg:w-1/4 lg:[@media(any-hover:hover)]:w-1/4 xl:w-1/5 xl:[@media(any-hover:hover)]:w-1/5 [@media(any-hover:hover)]:px-1.5 md:[@media(any-hover:hover)]:px-2.5 px-2.5 box-border overflow-hidden"-->
+        <!--        >-->
         <div
-          class="relative inline-flex flex-col align-top w-5/12 [@media(any-hover:hover)]:w-1/2 md:w-1/3 md:[@media(any-hover:hover)]:w-1/3 lg:w-1/4 lg:[@media(any-hover:hover)]:w-1/4 xl:w-1/5 xl:[@media(any-hover:hover)]:w-1/5 [@media(any-hover:hover)]:px-4 md:[@media(any-hover:hover)]:px-2.5 px-2.5 box-border overflow-hidden"
+          class="relative inline-flex flex-col align-top w-5/12 md:w-1/3 lg:w-1/4 xl:w-1/5 [@media(any-hover:none)]:px-2.5 box-border overflow-hidden [@media(any-hover:hover)]:w-full"
         >
-          <div class="relative w-full align-top rounded-t-2xl overflow-hidden">
+          <div
+            class="relative w-full align-top rounded-t-2xl [@media(any-hover:hover)]:rounded-t-xl [@media(any-hover:hover)]:md:rounded-t-2xl overflow-hidden"
+          >
             <TheImage
               :src="`${BASE_URL}/${comic._id}/${comic.coverImage.chapter}/${comic.coverImage.page}.webp`"
               alt=""
@@ -39,8 +46,12 @@ export default {
               class="cursor-pointer"
             />
           </div>
-          <div class="relative w-full bg-primary rounded-b-2xl">
-            <h1 class="text-base text-center mt-3 mb-1 tracking-wide font-NotoSerif font-bold">
+          <div
+            class="relative w-full bg-primary rounded-b-2xl [@media(any-hover:hover)]:rounded-b-xl [@media(any-hover:hover)]:md:rounded-b-2xl"
+          >
+            <h1
+              class="text-base [@media(any-hover:hover)]:text-sm [@media(any-hover:hover)]:md:text-base text-center mt-3 mb-1 tracking-wide font-NotoSerif font-bold"
+            >
               {{ comic.name }}
             </h1>
             <span class="px-3 text-xs text-neutral-content font-Noto font-bold">{{

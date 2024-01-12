@@ -1,6 +1,6 @@
 <script>
 import { onMounted, ref } from 'vue'
-import { http } from 'common'
+
 import { TheImage } from 'ui'
 import { BASE_URL } from 'common'
 
@@ -14,12 +14,12 @@ export default {
     //   response.data = comic.value
     //   console.log(response)
     // })()
-    onMounted(async () => {
-      const response = await http.getComic('64d7bc26fcc6149b097c74db')
-      comic.value = response.data
-      console.log(response)
-      console.log(comic.value._id)
-    })
+    // onMounted(async () => {
+    //   const response = await getComic('64d7bc26fcc6149b097c74db')
+    //   comic.value = response.data
+    //   console.log(response)
+    //   console.log(comic.value._id)
+    // })
     return {
       comic,
       BASE_URL

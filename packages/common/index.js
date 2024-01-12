@@ -6,7 +6,6 @@ import useToken from './utils/useToken'
 import useDebounce from './utils/useDebounce'
 import showMsg from './utils/showMsg'
 import showLoader from './utils/showLoader'
-import * as http from './network/http'
 
 export {
   request,
@@ -17,5 +16,4 @@ export {
   useDebounce,
   showMsg,
   showLoader,
-  http
 }

@@ -14,6 +14,10 @@ const searchTypes = [
   {
     id: 'tag',
     label: '标签'
+  },
+  {
+    id: 'author',
+    label: '作者'
   }
 ]
 export default {

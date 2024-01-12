@@ -127,13 +127,18 @@ class ComicController {
   }
 
   public async getSearchComics(ctx: Context) {
-    const { name, tag } = ctx.query
-    if (!name && !tag) {
+    const { name, tag, author } = ctx.query
+    if (!name && !tag && !author) {
       ctx.body = Response.Success<IComic[]>({ data: [] })
       return
     }
     if (tag) {
       const searchComics = await Comic.find({ tags: { $in: [tag] } })
+      ctx.body = Response.Success<IComic[]>({ data: searchComics })
+      return
+    }
+    if (author) {
+      const searchComics = await Comic.find({ author: { $regex: author, $options: 'i' } })
       ctx.body = Response.Success<IComic[]>({ data: searchComics })
       return
     }

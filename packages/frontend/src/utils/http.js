@@ -159,6 +159,7 @@ export function getSearch(keyword, type = 'name') {
   let query
 
   if (type === 'tag') query = `tag=${keyword}`
+  else if (type === 'author') query = `author=${keyword}`
   else query = `name=${keyword}`
 
   return request(

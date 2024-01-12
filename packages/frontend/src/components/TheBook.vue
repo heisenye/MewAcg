@@ -146,7 +146,15 @@ export default {
           <span>{{ chapters }}</span>
         </div>
         <div class="text-white font-base">
-          作者：<button class="btn btn-sm btn-secondary font-Noto">{{ author }}</button>
+          作者：
+          <TheButton
+            type="secondary"
+            class="font-Noto"
+            size="sm"
+            @click="goSearchResult(author, 'author')"
+          >
+            {{ author }}
+          </TheButton>
         </div>
         <div class="space-x-1.5 text-white font-base">
           标签：

@@ -98,11 +98,13 @@ export default {
         URL.revokeObjectURL(previewSrc.value)
       }
     })
-    const { username, id, createdAt, logout } = userStore
+    const { username, id: uid, createdAt, logout } = userStore
 
     return {
+      BASE_URL,
+
+      uid,
       username,
-      id,
       createdAt,
       previewSrc,
       uploadAvatarInput,
@@ -111,8 +113,7 @@ export default {
       uploadError,
       cancelUpload,
       uploadAvatar,
-      logout,
-      BASE_URL
+      logout
     }
   }
 }
@@ -160,7 +161,7 @@ export default {
       <div class="navbar rounded-xl bg-primary w-full px-4">
         <div class="flex-none lg:flex lg:flex-col lg:w-full lg:items-start lg:pl-2">
           <span class="text-xl pr-4 tracking-widest text-white">UID</span>
-          <span class="text-sm tracking-wider">{{ id }}</span>
+          <span class="text-sm tracking-wider">{{ uid }}</span>
         </div>
       </div>
       <div class="navbar px-4 rounded-xl bg-primary w-full text-lg">

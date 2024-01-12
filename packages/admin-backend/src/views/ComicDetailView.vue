@@ -1,8 +1,9 @@
 <script>
 import { onMounted, ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+import { getComic, patchComic, deleteComic, getComicChapter, postComicChapter, putComicCoverImage} from '@/utils/http.js'
 import { TheNavigation, TheButton, TheIcon, TheModal, TheImage } from 'ui'
-import { http, comicConstants, showMsg, msg, BASE_URL } from 'common'
+import { comicConstants, showMsg, msg, BASE_URL } from 'common'
 
 const { statuses, tags } = comicConstants
 
@@ -32,44 +33,14 @@ export default {
     const selectedPage = ref(1)
 
     onMounted(async () => {
-      const response = await http.getComic(id)
+      const response = await getComic(id)
       selectedComic.value = response.data
       selectedChapter.value = response.data.coverImage.chapter
       selectedPage.value = response.data.coverImage.page
     })
-    const selectCoverImage = async (chapter, page) => {
-      selectedChapter.value = chapter
-      selectedPage.value = page
-    }
-
-    const setCoverImage = async () => {
-      const response = await http.putComicCoverImage({
-        id,
-        chapter: selectedChapter.value,
-        page: selectedPage.value
-      })
-      if (response && response.code === 200) {
-        document.getElementById('coverImage').close()
-        showMsg({
-          messageType: 'success',
-          msg: msg['SET_COMIC_COVER_SUCCESS'],
-          popupType: 'toast'
-        })
-        setTimeout(() => {
-          router.go(0)
-        }, 1000)
-        return
-      }
-      document.getElementById('coverImage').close()
-      showMsg({
-        messageType: 'error',
-        msg: msg['UPDATE_COMIC_FAIL'],
-        popupType: 'alert'
-      })
-    }
 
     const modifyComic = async (field, newVal) => {
-      const response = await http.patchComic({
+      const response = await patchComic({
         id,
         field,
         newVal
@@ -88,7 +59,7 @@ export default {
     }
 
     const removeComic = async () => {
-      const response = await http.deleteComic(id)
+      const response = await deleteComic(id)
       console.log(response)
       if (response && response.code === 200) {
         showMsg({
@@ -130,11 +101,30 @@ export default {
       imageFiles.value.splice(index, 1)
     }
 
+    const selectCoverImage = async (chapter, page) => {
+      selectedChapter.value = chapter
+      selectedPage.value = page
+    }
+
+    const viewChapter = async (chapter) => {
+      try {
+        const response = await getComicChapter(route.params.id, chapter)
+        if (response.code === 200) {
+          imageUrls.value = Array.from(
+            { length: response.data.pages },
+            (v, k) => `${BASE_URL}/${route.params.id}/${chapter}/${k + 1}.webp`
+          )
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
     const createChapter = async () => {
       imageFiles.value.forEach((image) => {
         formData.append('images', image)
       })
-      const response = await http.postComicChapter({
+      const response = await postComicChapter({
         id,
         chapter: selectedComic.value.chapters + 1,
         formData
@@ -152,18 +142,30 @@ export default {
       }
     }
 
-    const viewChapter = async (chapter) => {
-      try {
-        const response = await http.getComicChapter(route.params.id, chapter)
-        if (response.code === 200) {
-          imageUrls.value = Array.from(
-            { length: response.data.pages },
-            (v, k) => `${BASE_URL}/${route.params.id}/${chapter}/${k + 1}.webp`
-          )
-        }
-      } catch (error) {
-        console.log(error)
+    const setCoverImage = async () => {
+      const response = await putComicCoverImage({
+        id,
+        chapter: selectedChapter.value,
+        page: selectedPage.value
+      })
+      if (response && response.code === 200) {
+        document.getElementById('coverImage').close()
+        showMsg({
+          messageType: 'success',
+          msg: msg['SET_COMIC_COVER_SUCCESS'],
+          popupType: 'toast'
+        })
+        setTimeout(() => {
+          router.go(0)
+        }, 1000)
+        return
       }
+      document.getElementById('coverImage').close()
+      showMsg({
+        messageType: 'error',
+        msg: msg['UPDATE_COMIC_FAIL'],
+        popupType: 'alert'
+      })
     }
 
     const removeChapter = async () => {}
@@ -503,7 +505,7 @@ export default {
             <div class="w-full grid grid-cols-3 place-items-center gap-4">
 
 <!--              template v-for-->
-              <template v-for="i in selectedComic.chapters" :key="i">
+              <template v-for="n in selectedComic.chapters" :key="n">
                 <div class="indicator w-full">
                   <TheIcon
                     class="indicator-item badge badge-error"
@@ -515,8 +517,8 @@ export default {
                     type="ghost"
                     class="bg-primary-content w-full"
                     onclick="document.getElementById('viewChapterImagesModal').showModal()"
-                    @click="viewChapter(i)"
-                    >{{ i }}
+                    @click="viewChapter(n)"
+                    >{{ n }}
                   </TheButton>
                 </div>
               </template>
