@@ -23,6 +23,12 @@ router.post(
   upload.array('images'),
   comicController.createComicChapter
 )
+router.delete(
+  '/comics/:id/:chapter(\\d+)',
+  Middleware.validateObjectId,
+  Middleware.validateChapter,
+  comicController.removeComicChapter
+)
 router.get('/history', comicController.getHistoryComics)
 router.post('/favorite', Middleware.auth, comicController.createFavoriteComic)
 router.delete(

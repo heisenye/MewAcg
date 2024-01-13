@@ -342,6 +342,31 @@ var ComicController = /** @class */ (function () {
             });
         });
     };
+    ComicController.prototype.removeComicChapter = function (ctx) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _a, comicId, chapter, deleteResult;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        _a = ctx.params, comicId = _a.id, chapter = _a.chapter;
+                        return [4 /*yield*/, comicChapter_model_1.default.deleteOne({ comicId: comicId, chapter: chapter })];
+                    case 1:
+                        deleteResult = _b.sent();
+                        if (deleteResult.deletedCount === 0) {
+                            ctx.response.status = status_1.ResponseCode.Not_Found;
+                            ctx.body = response_1.default.NoComic();
+                            return [2 /*return*/];
+                        }
+                        return [4 /*yield*/, comic_model_1.default.updateOne({ _id: comicId }, { $inc: { chapters: -1 } })];
+                    case 2:
+                        _b.sent();
+                        fs.rmSync("./app/public/".concat(comicId, "/").concat(chapter), { recursive: true });
+                        ctx.body = response_1.default.Success();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
     ComicController.prototype.setComicCover = function (ctx) {
         return __awaiter(this, void 0, void 0, function () {
             var id, _a, chapter, page, comic;

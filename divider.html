@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    .divider {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-top: 1rem/* 16px */;
+      margin-bottom: 1rem/* 16px */;
+      height: 1rem/* 16px */;
+      white-space: nowrap;
+    }
+    .divider:before,
+    .divider:after {
+      height: 0.125rem/* 2px */;
+      width: 100%;
+      flex-grow: 1;
+      --tw-content: '';
+      content: var(--tw-content);
+      background-color: lightblue;
+    }
+
+    .divider:not(:empty) {
+      gap: 1rem/* 16px */;
+    }
+
+    .test {
+      background-color: #00b3f0;
+      position: relative;
+    }
+    .test:before {
+      content: '';
+      position: absolute;
+      display: inline-block;
+      width: 1rem;
+      height: 1rem/* 16px */;
+      left: -1rem;
+      background-color: indianred;
+    }
+    .test:after {
+      content: '';
+      position: absolute;
+      display: inline-block;
+      right: -1rem;
+      width: 1rem;
+      height: 1rem/* 16px */;
+      background-color: indianred;
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="divider">(=^ ◡ ^=)</div>
+
+<span class="test">test</span>
+
+</body>
+</html>

@@ -37,9 +37,7 @@ export default {
           @click="goBook(comic._id)"
         />
         <div class="card-body bg-primary rounded-b-2xl pt-4 px-4 pb-3">
-          <h1
-            class="text-base text-center tracking-wide font-NotoSerif font-black whitespace-nowrap"
-          >
+          <h1 class="text-base text-center tracking-wide font-NotoSerif font-black">
             {{ comic.name }}
           </h1>
           <span class="text-xs text-neutral-content font-Noto font-black">{{ comic.author }}</span>

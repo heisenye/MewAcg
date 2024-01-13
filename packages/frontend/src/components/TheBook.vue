@@ -169,8 +169,9 @@ export default {
             </TheButton>
           </template>
         </div>
-        <div class="text-white font-base">
-          简介：<span class="text-base-content font-NotoSerif">{{ description }}</span>
+        <div class="text-white font-base flex">
+          <span class="whitespace-nowrap">简介：</span>
+          <span class="text-neutral-content font-NotoSerif">{{ description }}</span>
         </div>
         <TheButton
           type="error"

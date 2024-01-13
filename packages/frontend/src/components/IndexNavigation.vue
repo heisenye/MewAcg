@@ -67,12 +67,6 @@ export default {
       })
     })
 
-    const searchHandler = () => {
-      if (keyword.value.trim()) {
-        goSearchResult(keyword.value)
-      }
-    }
-
     return {
       BASE_URL,
       keyword,
@@ -85,7 +79,7 @@ export default {
       goLogin,
       goProfile,
       goSearch,
-      searchHandler
+      goSearchResult
     }
   }
 }
@@ -128,8 +122,8 @@ export default {
             type="text"
             placeholder="搜索标题或标签"
             class="nav-input"
-            @keyup.enter="searchHandler"
-            v-model="keyword"
+            @keyup.enter="goSearchResult(keyword)"
+            v-model.trim="keyword"
           />
           <TheIcon type="magnifying-glass" class="absolute left-4 3xl:text-lg text-accent" />
           <TheButton
@@ -137,22 +131,24 @@ export default {
             type="error"
             :disabled="isSearchDisabled"
             class="absolute right-4 size-6 3xl:size-8 shadow-md"
+            @click="goSearchResult(keyword)"
           >
             <TheIcon
               size="sm"
               type="arrow-right"
               class="text-base"
               :class="{ 'text-white': !isSearchDisabled }"
-              @click="searchHandler"
             />
           </TheButton>
         </div>
-        <TheButton type="ghost" size="md" shape="circle" class="lg:hidden text-white">
-          <TheIcon
-            type="magnifying-glass"
-            class="text-base sm:text-lg lg:hidden"
-            @click="goSearch"
-          />
+        <TheButton
+          type="ghost"
+          size="md"
+          shape="circle"
+          class="lg:hidden text-white"
+          @click="goSearch"
+        >
+          <TheIcon type="magnifying-glass" class="text-base sm:text-lg lg:hidden" />
         </TheButton>
         <TheButton
           type="ghost"

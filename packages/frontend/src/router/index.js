@@ -139,7 +139,7 @@ const router = createRouter({
     if (to.name === 'read' && from.meta['isProgressRemembered']) {
       setTimeout(() => {
         window.scrollTo(0, 0)
-      }, 120) //setTimeout
+      }, 250) //setTimeout
       const { id, chapter } = to.params
       const ele = localStorage.getItem(`${id}-${chapter}`)
       if (ele) {
@@ -163,16 +163,10 @@ const router = createRouter({
         top: 0,
         behavior: 'smooth'
       }
-      // return new Promise((resolve) => {
-      //   setTimeout(() => {
-      //     resolve({
-      //       top: 0,
-      //       behavior: 'smooth'
-      //     }) //resolve
-      //   }, 50) //setTimeout
-      // }) //Promise
     }
   }
 })
 
 export default router
+// 174ada13b
+// naoxin2040419@gmail.com

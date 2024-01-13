@@ -169,6 +169,19 @@ class ComicController {
     ctx.body = Response.Success()
   }
 
+  public async removeComicChapter(ctx: Context) {
+    const { id: comicId, chapter } = ctx.params
+    const deleteResult = await ComicChapter.deleteOne({ comicId, chapter })
+    if (deleteResult.deletedCount === 0) {
+      ctx.response.status = ResponseCode.Not_Found
+      ctx.body = Response.NoComic()
+      return
+    }
+    await Comic.updateOne({ _id: comicId }, { $inc: { chapters: -1 } })
+    fs.rmSync(`./app/public/${comicId}/${chapter}`, { recursive: true })
+    ctx.body = Response.Success()
+  }
+
   public async setComicCover(ctx: Context) {
     const { id } = ctx.params
     const { chapter, page } = ctx.request['body']

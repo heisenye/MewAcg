@@ -1,31 +1,39 @@
 <script>
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import TheBook from '@/components/TheBook.vue'
-import { goBack, goHome } from '@/utils/router'
+import { goBack, goHome, goSearch, goSearchResult } from '@/utils/router'
 import { getComic } from '@/utils/http.js'
 import { TheNavigation, TheButton, TheIcon } from 'ui'
 
 export default {
   name: 'BookView',
+  methods: { goSearchResult },
   components: { TheBook, TheNavigation, TheButton, TheIcon },
   setup() {
     const route = useRoute()
     const { id } = route.params
 
-    const comic = ref(null)
+    const keyword = ref('')
+    const isSearchDisabled = computed(() => !keyword.value)
 
+    const comic = ref(null)
     onMounted(async () => {
       const response = await getComic(id)
       if (response.code === 200) {
         comic.value = response.data
       }
     })
-    return {
-      comic,
 
+    return {
       goBack,
-      goHome
+      goHome,
+      goSearch,
+      goSearchResult,
+
+      comic,
+      keyword,
+      isSearchDisabled
     }
   }
 }
@@ -44,10 +52,36 @@ export default {
       </template>
       <template #right>
         <div class="nav-input-container">
-          <input type="text" placeholder="搜索标题或标签" class="nav-input" />
+          <input
+            type="text"
+            placeholder="搜索标题或标签"
+            class="nav-input"
+            v-model.trim="keyword"
+            @keyup.enter="goSearchResult(keyword)"
+          />
           <TheIcon type="magnifying-glass" class="absolute left-4" />
+          <TheButton
+            shape="circle"
+            type="error"
+            :disabled="isSearchDisabled"
+            class="absolute right-4 size-6 3xl:size-8 shadow-md"
+            @click="goSearchResult(keyword)"
+          >
+            <TheIcon
+              size="sm"
+              type="arrow-right"
+              class="text-base"
+              :class="{ 'text-white': !isSearchDisabled }"
+            />
+          </TheButton>
         </div>
-        <TheButton type="ghost" size="md" shape="circle" class="lg:hidden btn-md text-white">
+        <TheButton
+          type="ghost"
+          size="md"
+          shape="circle"
+          class="lg:hidden btn-md text-white"
+          @click="goSearch"
+        >
           <TheIcon
             type="magnifying-glass"
             class="text-base sm:text-lg xl:text-xl 3xl:text-2xl lg:hidden"

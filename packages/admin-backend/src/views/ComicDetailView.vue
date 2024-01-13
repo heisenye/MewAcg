@@ -1,7 +1,7 @@
 <script>
 import { onMounted, ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { getComic, patchComic, deleteComic, getComicChapter, postComicChapter, putComicCoverImage} from '@/utils/http.js'
+import { getComic, patchComic, deleteComic, getComicChapter, postComicChapter, deleteComicChapter ,putComicCoverImage} from '@/utils/http.js'
 import { TheNavigation, TheButton, TheIcon, TheModal, TheImage } from 'ui'
 import { comicConstants, showMsg, msg, BASE_URL } from 'common'
 
@@ -168,7 +168,21 @@ export default {
       })
     }
 
-    const removeChapter = async () => {}
+    const removeChapter = async (chapter) => {
+      console.log(id, chapter)
+      const response = await deleteComicChapter(id, chapter)
+      document.getElementById('chaptersModal').close()
+      if (response && response.code === 200) {
+        showMsg({
+          messageType: 'success',
+          msg: msg['DELETE_COMIC_CHAPTER_SUCCESS'],
+          popupType: 'toast'
+        })
+        setTimeout(() => {
+          router.go(0)
+        }, 1000)
+      }
+    }
 
     return {
       BASE_URL,
@@ -494,31 +508,31 @@ export default {
             type="ghost"
             size="sm"
             class="bg-base-300 ml-auto"
-            onclick="document.getElementById('viewChaptersModal').showModal()"
+            onclick="document.getElementById('chaptersModal').showModal()"
           >
             <TheIcon type="eye" size="lg" />
           </TheButton>
 
 
 <!--          chaptersModal-->
-          <TheModal id="viewChaptersModal">
-            <div class="w-full grid grid-cols-3 place-items-center gap-4">
+          <TheModal id="chaptersModal">
+            <div class="w-full grid grid-cols-3 place-items-center gap-4" v-if="selectedComic.chapters">
 
 <!--              template v-for-->
-              <template v-for="n in selectedComic.chapters" :key="n">
+              <template v-for="chapter in selectedComic.chapters" :key="chapter">
                 <div class="indicator w-full">
                   <TheIcon
                     class="indicator-item badge badge-error"
                     type="xmark"
                     size="xs"
-                    @click="removeChapter"
+                    @click="removeChapter(chapter)"
                   />
                   <TheButton
                     type="ghost"
                     class="bg-primary-content w-full"
-                    onclick="document.getElementById('viewChapterImagesModal').showModal()"
-                    @click="viewChapter(n)"
-                    >{{ n }}
+                    onclick="document.getElementById('chapterImagesModal').showModal()"
+                    @click="viewChapter(chapter)"
+                    >{{ chapter }}
                   </TheButton>
                 </div>
               </template>
@@ -536,7 +550,7 @@ export default {
 
 
 <!--              chapterImagesModal-->
-              <TheModal id="viewChapterImagesModal">
+              <TheModal id="chapterImagesModal">
                 <div class="w-full mt-4 px-4 grid grid-cols-3 gap-4">
                   <div v-for="(image, index) in imageUrls" :key="index" class="relative rounded-lg">
                     <TheButton
@@ -572,6 +586,7 @@ export default {
       </div>
 <!--      chapters-->
 
+
 <!--      newChapterModal-->
       <TheModal id="newChapter">
         <h1 class="text-center text-lg">第{{ selectedComic.chapters + 1 }}章</h1>
@@ -585,7 +600,7 @@ export default {
             >
               <TheIcon type="xmark" size="sm" class="text-white" />
             </TheButton>
-            <img :src="image" alt="" class="object-cover object-center rounded-lg" />
+            <TheImage :src="image" alt="" class="object-cover object-center rounded-lg -z-10"/>
           </div>
           <div
             class="text-center aspect-3/4 rounded-lg bg-base-300 flex justify-center items-center"
@@ -635,10 +650,13 @@ export default {
       </TheModal>
 <!--      newChapterModal-->
 
+
       <div class="max-w-xl w-full flex justify-evenly mt-6 mx-auto">
         <TheButton type="success"> 存儲 </TheButton>
         <TheButton type="error" @click="removeComic"> 刪除 </TheButton>
       </div>
     </div>
   </main>
+
+
 </template>
