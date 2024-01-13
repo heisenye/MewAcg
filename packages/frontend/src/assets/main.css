@@ -138,7 +138,7 @@ body {
     @apply input input-secondary bg-secondary w-full h-9 pl-12 xl:pl-14 2xl:pl-16 3xl:h-10 3xl:pl-20 text-sm 3xl:text-base rounded tracking-widest placeholder:font-base placeholder:font-black;
   }
   .nav-input-container {
-    @apply relative mx-auto hidden lg:flex lg:items-center w-[20rem] xl:w-[24rem] 2xl:w-[27rem] 3xl:w-[30rem] font-Noto;
+    @apply relative mx-auto hidden 2md:flex lg:items-center w-[21rem] xl:w-[24rem] 2xl:w-[27rem] 3xl:w-[30rem] font-Noto;
   }
 
   @media (hover: none) {

@@ -30,7 +30,7 @@ export default {
     >
       <template v-for="comic in comicList" :key="comic._id">
         <div
-          class="relative inline-flex flex-col align-top w-5/12 md:w-1/3 lg:w-1/4 xl:w-1/5 [@media(any-hover:none)]:px-2.5 box-border overflow-hidden [@media(any-hover:hover)]:w-full"
+          class="relative inline-flex flex-col align-top w-2/5 md:w-1/3 lg:w-1/4 xl:w-1/5 [@media(any-hover:none)]:px-2.5 box-border overflow-hidden [@media(any-hover:hover)]:w-full"
         >
           <div
             class="relative w-full align-top rounded-t-2xl [@media(any-hover:hover)]:rounded-t-xl [@media(any-hover:hover)]:md:rounded-t-2xl overflow-hidden"
@@ -47,7 +47,7 @@ export default {
             class="relative w-full bg-primary rounded-b-2xl [@media(any-hover:hover)]:rounded-b-xl [@media(any-hover:hover)]:md:rounded-b-2xl"
           >
             <h1
-              class="text-base px-2 [@media(any-hover:hover)]:text-sm [@media(any-hover:hover)]:md:text-base text-center mt-3 mb-1 tracking-wide font-NotoSerif font-bold whitespace-pre-line"
+              class="text-sm px-2 [@media(any-hover:hover)]:text-sm [@media(any-hover:hover)]:2xl:text-base text-center mt-3 mb-1 tracking-wide font-NotoSerif font-bold whitespace-pre-line"
             >
               {{ comic.name }}
             </h1>

@@ -20,8 +20,9 @@ export default {
     const comic = ref(null)
     onMounted(async () => {
       const response = await getComic(id)
-      if (response.code === 200) {
+      if (response && response.code === 200) {
         comic.value = response.data
+        document.title = `${comic.value.name}`
       }
     })
 

@@ -126,18 +126,18 @@ export default {
         </p>
       </div>
       <div
-        class="relative flex items-center justify-center pb-6 pt-8 md:px-6 lg:px-0 xl:px-4 lg:w-3/5"
+        class="relative flex items-center justify-center pb-6 pt-8 md:px-6 lg:px-0 xl:px-4 lg:basis-1/2 lg:flex-shrink-0"
       >
         <TheImage
           :src="`${BASE_URL}/${id}/${coverImage.chapter}/${coverImage.page}.webp`"
-          class="rounded-lg w-3/5 lg:rounded-lg h-fit"
+          class="rounded-lg w-2/3 lg:rounded-lg h-fit"
         />
       </div>
-      <div class="card-body pt-4 md:pt-6 px-6 md:px-10 lg:px-4 rounded-b-xl xl:text-lg">
+      <div class="card-body pt-4 md:pt-6 px-6 md:px-12 rounded-b-xl xl:text-lg">
         <h1 class="card-title text-2xl self-center pb-2 font-NotoSerif font-black text-white">
           {{ name }}
         </h1>
-        <div class="text-accent opacity-80">
+        <div class="text-accent lg:text-sm xl:text-base opacity-80 whitespace-nowrap">
           <span>{{ new Date(date).toLocaleDateString() }}</span
           >&nbsp; | &nbsp;<i class="fa-solid fa-eye"></i>&nbsp;
           <span>{{ viewCount }}</span>
@@ -171,7 +171,9 @@ export default {
         </div>
         <div class="text-white font-base flex">
           <span class="whitespace-nowrap">简介：</span>
-          <span class="text-neutral-content font-NotoSerif font-black">{{ description }}</span>
+          <span class="text-neutral-content break-all font-NotoSerif font-black">{{
+            description
+          }}</span>
         </div>
         <TheButton
           type="error"

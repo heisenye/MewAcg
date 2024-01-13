@@ -40,13 +40,13 @@ export default {
 
     const linkBottomPosition = computed(() => {
       if (windowWidth.value > 1050) {
-        const gap = (760 - 60 * 5) / 6
+        const gap = (712 - 60 * 5) / 6
         return {
           left: activeLinkIndex.value * (gap + 60) + gap + 'px'
         }
       }
       if (windowWidth.value > 600) {
-        const gap = (600 - 56 * 5) / 6
+        const gap = (544 - 56 * 5) / 6
         return { left: activeLinkIndex.value * (gap + 56) + gap + 'px' }
       } else {
         const gap = (windowWidth.value - 56 * 5) / 6
@@ -145,10 +145,10 @@ export default {
           type="ghost"
           size="md"
           shape="circle"
-          class="lg:hidden text-white"
+          class="2md:hidden text-white"
           @click="goSearch"
         >
-          <TheIcon type="magnifying-glass" class="text-base sm:text-lg lg:hidden" />
+          <TheIcon type="magnifying-glass" class="text-base sm:text-lg 2md:hidden" />
         </TheButton>
         <TheButton
           type="ghost"
@@ -165,7 +165,7 @@ export default {
           shape="circle"
           tooltip="个人中心"
           :transition="true"
-          class="before:text-xs md:before:text-sm size-12 lg:size-14 2xl:size-16"
+          class="before:text-xs md:before:text-sm size-12 xl:size-14 2xl:size-16"
           @click="token ? goProfile() : goLogin()"
         >
           <TheAvatar class="sm:text-xl 2xl:text-2xl">

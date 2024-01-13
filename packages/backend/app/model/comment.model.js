@@ -10,5 +10,17 @@ var CommentSchema = new mongoose_1.Schema({
 }, {
     timestamps: true
 });
+CommentSchema.pre('save', function (next) {
+    try {
+        var comment = this;
+        var id = comment.comicId;
+        var Comic = (0, mongoose_1.model)('Comic');
+        Comic.updateOne({ _id: id }, { $inc: { commentCount: 1 } });
+        next();
+    }
+    catch (error) {
+        next(error);
+    }
+});
 var Comment = (0, mongoose_1.model)('Comment', CommentSchema);
 exports.default = Comment;

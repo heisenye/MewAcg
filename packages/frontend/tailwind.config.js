@@ -9,6 +9,10 @@ module.exports = {
         NotoSerif: ['Noto Serif SC', 'serif'],
         base: ['tsangeryuyangtw-subset', 'sans-serif'],
       },
+      width: {
+        '3/8': '37.5%',
+        '5/8': '62.5%',
+      },
       fontSize: {
 
       },
@@ -16,9 +20,10 @@ module.exports = {
         xs: '300px',
         sm: '360px',
         md: '450px',
-        lg: '600px',
-        xl: '760px',
-        '2xl': '885px',
+        lg: '516px',
+        '2md': '600px',
+        xl: '708px',
+        '2xl': '825px',
         '3xl': '1050px',
         '4xl': '1120x',
         '5xl': '1350px',

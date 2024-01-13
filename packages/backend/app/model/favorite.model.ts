@@ -15,7 +15,7 @@ const FavoriteSchema = new Schema(
 
 FavoriteSchema.pre('save', async function (next) {
   try {
-    const favorite = this
+    const favorite = this as Omit<IFavorite, keyof Document>
     const id = favorite.comicId
     const Comic = model('Comic')
     await Comic.updateOne({ _id: id }, { $inc: { favoriteCount: 1 } })

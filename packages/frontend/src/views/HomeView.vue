@@ -33,7 +33,7 @@ export default {
   <main>
     <div class="relative top-40">
       <div class="max-w-screen-2xl mx-auto flex justify-between items-center mb-1 font-base">
-        <span class="relative left-6 text-xl lg:text-2xl text-white font-black"> 热门推荐 </span>
+        <span class="relative left-6 text-xl 2xl:text-2xl text-white font-black"> 热门推荐 </span>
         <TheButton type="ghost">
           <span>更多&gt;</span>
         </TheButton>

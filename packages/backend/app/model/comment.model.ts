@@ -23,6 +23,18 @@ const CommentSchema = new Schema(
   }
 )
 
+CommentSchema.pre('save', function (next) {
+  try {
+    const comment = this as Omit<IComment, keyof Document>
+    const id = comment.comicId
+    const Comic = model('Comic')
+    Comic.updateOne({ _id: id }, { $inc: { commentCount: 1 } })
+    next()
+  } catch (error) {
+    next(error as Error)
+  }
+})
+
 const Comment = model<IComment>('Comment', CommentSchema)
 
 export default Comment
