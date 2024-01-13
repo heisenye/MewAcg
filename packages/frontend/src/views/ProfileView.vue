@@ -88,7 +88,7 @@ export default {
 
     onMounted(async () => {
       const response = await getProfile(token.value)
-      if (response.code === 200) {
+      if (response && response.code === 200) {
         userStore.setUser(response.data)
       }
     })

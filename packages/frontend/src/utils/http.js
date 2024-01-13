@@ -14,6 +14,13 @@ export function getComics() {
     url: '/comics'
   }).catch(blankCb)
 }
+
+export function getPopularComics() {
+  return request({
+    method: 'GET',
+    url: '/comics/popular'
+  }).catch(blankCb)
+}
 export function getComic(id) {
   return request({
     method: 'GET',
@@ -193,6 +200,20 @@ export function postComicComment({ id, content }) {
       method: 'POST',
       url: `/comics/${id}/comments`,
       data: { content }
+    },
+    {
+      useCache: false,
+      useThrottle: false
+    }
+  ).catch(blankCb)
+}
+
+export function postView(id, date) {
+  return request(
+    {
+      method: 'POST',
+      url: `/comics/${id}/view`,
+      data: { date }
     },
     {
       useCache: false,

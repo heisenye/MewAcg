@@ -171,7 +171,7 @@ export default {
         </div>
         <div class="text-white font-base flex">
           <span class="whitespace-nowrap">简介：</span>
-          <span class="text-neutral-content font-NotoSerif">{{ description }}</span>
+          <span class="text-neutral-content font-NotoSerif font-black">{{ description }}</span>
         </div>
         <TheButton
           type="error"

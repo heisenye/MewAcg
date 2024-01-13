@@ -15,7 +15,7 @@ export default {
     const favoriteComics = ref([])
     onMounted(async () => {
       const response = await getFavoriteComics()
-      if (response.code === 200) {
+      if (response && response.code === 200) {
         favoriteComics.value = response.data
       }
       isRequestCompleted.value = true

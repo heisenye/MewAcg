@@ -6,6 +6,7 @@ import multer = require('@koa/multer')
 const upload = multer()
 
 router.get('/comics', comicController.getComics)
+router.get('/comics/popular', comicController.getPopularComics)
 router.post('/comic', comicController.createComic)
 router.get('/comics/:id', Middleware.validateObjectId, comicController.getComic)
 router.patch('/comic/:id', Middleware.validateObjectId, comicController.updateComic)
@@ -53,6 +54,12 @@ router.post(
   Middleware.auth,
   Middleware.validateObjectId,
   comicController.createComicComment
+)
+router.post(
+  '/comics/:id/view',
+  Middleware.auth,
+  Middleware.validateObjectId,
+  comicController.createView
 )
 
 export default router

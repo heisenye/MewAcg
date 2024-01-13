@@ -2,9 +2,9 @@
 import { onMounted, onUnmounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import TheRead from '@/components/TheRead.vue'
-import { getComicChapter } from '@/utils/http.js'
+import { getComicChapter, postView } from '@/utils/http.js'
 import { TheImage, TheNavigation, TheIcon, TheButton, TheModal } from 'ui'
-import { useDebounce } from 'common'
+import { useDebounce, useToken } from 'common'
 
 export default {
   name: 'ReadView',
@@ -13,9 +13,11 @@ export default {
     const route = useRoute()
 
     const { id, chapter } = route.params
+    const { token } = useToken
     const pages = ref(0)
-    const isScrollingDown = ref(false)
+    const date = new Date().toISOString().split('T')[0]
     const imageWidth = ref('100')
+    const isScrollingDown = ref(false)
 
     const scrollFn = (() => {
       let lastScrollPos = 0
@@ -33,6 +35,8 @@ export default {
       const response = await getComicChapter(id, chapter)
       pages.value = response.data.pages
       window.addEventListener('scroll', scrollFn)
+      if (!token) return
+      await postView(id, date)
     })
 
     onUnmounted(() => {

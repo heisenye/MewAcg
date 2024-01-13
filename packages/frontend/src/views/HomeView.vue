@@ -2,7 +2,7 @@
 import { onBeforeMount, ref } from 'vue'
 import TheComicsRow from '@/components/TheComicsRow.vue'
 import { goBook } from '@/utils/router'
-import { getComics } from '@/utils/http.js'
+import { getPopularComics } from '@/utils/http.js'
 import { TheButton, TheIcon } from 'ui'
 import { BASE_URL } from 'common'
 
@@ -13,7 +13,7 @@ export default {
     const comicList = ref(null)
 
     onBeforeMount(async () => {
-      const response = await getComics()
+      const response = await getPopularComics()
       if (response && response.code === 200) {
         comicList.value = response.data.filter((comic) => comic.chapters !== 0)
       }

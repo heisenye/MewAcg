@@ -21,6 +21,7 @@ export default {
 
     const { token } = useToken
     const inputComment = ref('')
+    const commentCount = ref(0)
     const commentInputEl = ref()
     const isSubmitDisabled = computed(() => !inputComment.value)
     const isScrollButtonShow = ref(false)
@@ -41,6 +42,7 @@ export default {
       const response = await getComicComments(id)
       if (response && response.code === 200) {
         comments.value = response.data
+        commentCount.value = response.data.length
       }
       if (commentInputEl.value) {
         observer.observe(commentInputEl.value)
@@ -76,6 +78,7 @@ export default {
       isSubmitDisabled,
       isScrollButtonShow,
       comments,
+      commentCount,
       commentSubmitHandler,
       scrollToCommentInputEl
     }
@@ -85,7 +88,9 @@ export default {
 
 <template>
   <main class="relative top-4 w-full mx-auto px-4 pb-4 card rounded max-w-3xl bg-primary">
-    <h1 class="text-xl 3xl:text-2xl mt-6 mb-8 text-center font-base font-black">评论</h1>
+    <h1 class="text-xl 3xl:text-2xl mt-6 mb-8 text-center font-base font-black">
+      {{ commentCount }}&nbsp;&nbsp;评论
+    </h1>
     <RouterLink
       v-if="!token"
       :to="{ name: 'login' }"
@@ -109,8 +114,8 @@ export default {
       @click="commentSubmitHandler"
       >提交</TheButton
     >
-    <template v-for="comment in comments">
-      <TheComment :comment="comment" />
+    <template v-for="(comment, index) in comments">
+      <TheComment :comment="comment" :index="index + 1" />
     </template>
   </main>
   <teleport to="body">

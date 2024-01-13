@@ -37,81 +37,34 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var mongoose_1 = require("mongoose");
-var ComicSchema = new mongoose_1.Schema({
-    name: { type: String },
-    otherNames: [String],
-    author: String,
-    chapters: {
-        type: Number,
-        default: 0
-    },
-    status: {
-        type: String,
-        enum: ['ongoing', 'completed']
-    },
-    tags: [String],
-    viewCount: {
-        type: Number,
-        default: 0
-    },
-    favoriteCount: {
-        type: Number,
-        default: 0
-    },
-    commentCount: {
-        type: Number,
-        default: 0
-    },
-    popularity: Number,
-    coverImage: {
-        chapter: {
-            type: Number,
-            default: 1
-        },
-        page: {
-            type: Number,
-            default: 1
-        }
-    },
-    description: String,
-    otherInfo: [String],
-    createdAt: {
-        type: Date,
-        default: Date.now
-    },
-    updatedAt: {
-        type: Date,
-        default: Date.now
-    }
+var ViewSchema = new mongoose_1.Schema({
+    userId: { type: mongoose_1.Schema.Types.ObjectId, ref: 'User', required: true },
+    comicId: { type: mongoose_1.Schema.Types.ObjectId, ref: 'Comic', required: true },
+    date: { type: Date, default: function () { return new Date().toISOString().split('T')[0]; } }
 });
-var Comic = (0, mongoose_1.model)('Comic', ComicSchema);
-function getMillisecondsUntilTomorrow() {
-    var now = new Date();
-    var tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
-    return tomorrow.getTime() - now.getTime();
-}
-function updatePopularity() {
+ViewSchema.index({ userId: 1, comicId: 1, date: 1 }, { unique: true });
+ViewSchema.pre('save', function (next) {
     return __awaiter(this, void 0, void 0, function () {
-        var comics;
-        var _this = this;
+        var view, id, Comic, error_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, Comic.find({})];
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    view = this;
+                    id = view.comicId;
+                    Comic = (0, mongoose_1.model)('Comic');
+                    return [4 /*yield*/, Comic.updateOne({ _id: id }, { $inc: { viewCount: 1 } })];
                 case 1:
-                    comics = _a.sent();
-                    return [4 /*yield*/, Promise.all(comics.map(function (comic) { return __awaiter(_this, void 0, void 0, function () {
-                            return __generator(this, function (_a) {
-                                comic.popularity = (comic.viewCount * 0.15) + (comic.favoriteCount * 0.5) + (comic.commentCount * 0.35);
-                                return [2 /*return*/, comic.save()];
-                            });
-                        }); }))];
-                case 2:
                     _a.sent();
-                    setTimeout(updatePopularity, getMillisecondsUntilTomorrow());
-                    return [2 /*return*/];
+                    return [3 /*break*/, 3];
+                case 2:
+                    error_1 = _a.sent();
+                    next(error_1);
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
             }
         });
     });
-}
-setTimeout(updatePopularity, getMillisecondsUntilTomorrow());
-exports.default = Comic;
+});
+var View = (0, mongoose_1.model)('View', ViewSchema);
+exports.default = View;

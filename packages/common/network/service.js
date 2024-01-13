@@ -37,10 +37,12 @@ service.interceptors.response.use(
     return response
   },
   (error) => {
+    console.log(error)
     if (error.config.loading) {
       error.config.loading.remove()
     }
     if (!error.response) {
+      error.response = {data: {}}
       if (error.code === 'ERR_NETWORK') {
         error.response.data = msg['NETWORK_ERROR']
       } else {

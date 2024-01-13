@@ -9,6 +9,10 @@ export default {
     comment: {
       type: Object,
       required: true
+    },
+    index: {
+      type: Number,
+      required: true
     }
   },
   setup(props) {
@@ -29,7 +33,7 @@ export default {
 </script>
 
 <template>
-  <div class="divider divider-neutral"></div>
+  <div class="divider divider-neutral text-accent">{{ index }}</div>
   <main class="navbar px-0 lg:px-4 3xl:px-6 gap-3 3xl:gap-x-4">
     <div
       class="flex-none size-12 lg:size-14 3xl:h-16 3xl:w-16 rounded-full bg-primary overflow-hidden"

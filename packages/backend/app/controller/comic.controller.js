@@ -41,6 +41,7 @@ var path = require("path");
 var comic_model_1 = require("../model/comic.model");
 var comicChapter_model_1 = require("../model/comicChapter.model");
 var favorite_model_1 = require("../model/favorite.model");
+var view_model_1 = require("../model/view.model");
 var comment_model_1 = require("../model/comment.model");
 var response_1 = require("../utils/response");
 var status_1 = require("../constants/status");
@@ -55,6 +56,21 @@ var ComicController = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, comic_model_1.default.find({})];
+                    case 1:
+                        comics = _a.sent();
+                        ctx.response.status = status_1.ResponseCode.OK;
+                        ctx.body = response_1.default.Success({ data: comics });
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ComicController.prototype.getPopularComics = function (ctx) {
+        return __awaiter(this, void 0, void 0, function () {
+            var comics;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, comic_model_1.default.find({}).sort({ popularity: -1 }).limit(10)];
                     case 1:
                         comics = _a.sent();
                         ctx.response.status = status_1.ResponseCode.OK;
@@ -423,6 +439,31 @@ var ComicController = /** @class */ (function () {
                         content = ctx.request['body'].content;
                         return [4 /*yield*/, comment_model_1.default.create({ comicId: comicId, userId: userId, content: content })];
                     case 1:
+                        _a.sent();
+                        ctx.body = response_1.default.Success();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ComicController.prototype.createView = function (ctx) {
+        return __awaiter(this, void 0, void 0, function () {
+            var userId, comicId, date, existingView;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        userId = ctx.state.userId;
+                        comicId = ctx.params.id;
+                        date = ctx.request['body'].date;
+                        return [4 /*yield*/, view_model_1.default.findOne({ userId: userId, comicId: comicId, date: date })];
+                    case 1:
+                        existingView = _a.sent();
+                        if (existingView) {
+                            ctx.body = response_1.default.Success();
+                            return [2 /*return*/];
+                        }
+                        return [4 /*yield*/, view_model_1.default.create({ userId: userId, comicId: comicId })];
+                    case 2:
                         _a.sent();
                         ctx.body = response_1.default.Success();
                         return [2 /*return*/];

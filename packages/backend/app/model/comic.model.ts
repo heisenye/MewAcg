@@ -11,6 +11,8 @@ export interface IComic extends Document {
   otherNames: string[]
   viewCount: number
   favoriteCount: number
+  commentCount: number
+  popularity: number
   coverImage: {
     chapter: number
     page: number
@@ -40,6 +42,11 @@ const ComicSchema = new Schema({
     type: Number,
     default: 0
   },
+  commentCount: {
+    type: Number,
+    default: 0
+  },
+  popularity: Number,
   coverImage: {
     chapter: {
       type: Number,
@@ -62,6 +69,26 @@ const ComicSchema = new Schema({
   }
 })
 
+
 const Comic = model<IComic>('Comic', ComicSchema)
+
+function getMillisecondsUntilTomorrow() {
+  const now = new Date()
+  const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1)
+  return tomorrow.getTime() - now.getTime()
+}
+
+async function updatePopularity(){
+  const comics = await Comic.find({})
+  await Promise.all(comics.map(async comic => {
+    comic.popularity = (comic.viewCount * 0.15) + (comic.favoriteCount * 0.5) + (comic.commentCount * 0.35)
+    return comic.save()
+  }))
+
+  setTimeout(updatePopularity, getMillisecondsUntilTomorrow())
+}
+
+setTimeout(updatePopularity, getMillisecondsUntilTomorrow())
+
 
 export default Comic

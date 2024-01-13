@@ -5,6 +5,7 @@ import multer = require('@koa/multer')
 import Comic, { IComic } from '../model/comic.model'
 import ComicChapter, { IComicChapter } from '../model/comicChapter.model'
 import Favorite from '../model/favorite.model'
+import View from '../model/view.model'
 import Comment from '../model/comment.model'
 import Response from '../utils/response'
 import { ResponseCode } from '../constants/status'
@@ -14,6 +15,12 @@ import logger from '../logger'
 class ComicController {
   public async getComics(ctx: Context) {
     const comics = await Comic.find({})
+    ctx.response.status = ResponseCode.OK
+    ctx.body = Response.Success<IComic[]>({ data: comics })
+  }
+
+  public async getPopularComics(ctx: Context) {
+    const comics = await Comic.find({}).sort({ popularity: -1 }).limit(10)
     ctx.response.status = ResponseCode.OK
     ctx.body = Response.Success<IComic[]>({ data: comics })
   }
@@ -210,6 +217,19 @@ class ComicController {
     const { id: comicId } = ctx.params
     const { content } = ctx.request['body']
     await Comment.create({ comicId, userId, content })
+    ctx.body = Response.Success()
+  }
+
+  public async createView(ctx: Context) {
+    const userId = ctx.state.userId
+    const { id: comicId } = ctx.params
+    const { date } = ctx.request['body']
+    const existingView = await View.findOne({ userId, comicId, date })
+    if (existingView) {
+      ctx.body = Response.Success()
+      return
+    }
+    await View.create({ userId, comicId })
     ctx.body = Response.Success()
   }
 }
