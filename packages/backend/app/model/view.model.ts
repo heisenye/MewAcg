@@ -10,9 +10,9 @@ const ViewSchema = new Schema({
   date: { type: Date, default: () => new Date().toISOString().split('T')[0] }
 })
 
-ViewSchema.index({ userId: 1, comicId: 1, date: 1 }, { unique: true})
+ViewSchema.index({ userId: 1, comicId: 1, date: 1 }, { unique: true })
 
-ViewSchema.pre('save', async function(next)  {
+ViewSchema.pre('save', async function (next) {
   try {
     const view = this
     const id = view.comicId

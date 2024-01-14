@@ -69,7 +69,6 @@ const ComicSchema = new Schema({
   }
 })
 
-
 const Comic = model<IComic>('Comic', ComicSchema)
 
 function getMillisecondsUntilTomorrow() {
@@ -78,17 +77,19 @@ function getMillisecondsUntilTomorrow() {
   return tomorrow.getTime() - now.getTime()
 }
 
-async function updatePopularity(){
+async function updatePopularity() {
   const comics = await Comic.find({})
-  await Promise.all(comics.map(async comic => {
-    comic.popularity = (comic.viewCount * 0.15) + (comic.favoriteCount * 0.5) + (comic.commentCount * 0.35)
-    return comic.save()
-  }))
+  await Promise.all(
+    comics.map(async (comic) => {
+      comic.popularity =
+        comic.viewCount * 0.15 + comic.favoriteCount * 0.5 + comic.commentCount * 0.35
+      return comic.save()
+    })
+  )
 
   setTimeout(updatePopularity, getMillisecondsUntilTomorrow())
 }
 
 setTimeout(updatePopularity, getMillisecondsUntilTomorrow())
-
 
 export default Comic

@@ -8,27 +8,25 @@
       display: flex;
       width: 400px;
       height: 200px;
-      background-color: lightblue;
       border: 1px solid black;
+      position: relative;
     }
-
-    .side {
-      background-color: indianred;
-      width: 60%;
-      height: 100px;
+    .flex-container::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-color: #00b3f0;
+      opacity: 20%;
     }
-
-    .text {
-      word-break: break-word;
-    }
+    
   </style>
 </head>
 <body>
 
 <div class="flex-container">
-  <div class="side"></div>
-  <div class="text">11111111111111111111111111111111111111111111</div>
+  <h1>hello</h1>
 </div>
+
 
 <script>
   const request = window.indexedDB.open('test', 1, function (db) {

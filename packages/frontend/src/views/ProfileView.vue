@@ -176,7 +176,11 @@ export default {
           :to="{ name: 'favorite' }"
           class="btn btn-ghost flex-1 px-0 justify-start gap-4 flex-nowrap"
         >
-          <TheButton type="error" class="bg-error/25 hover:bg-error/50 border-none xl:flex-1">
+          <TheButton
+            id="favoriteBtn"
+            type="error"
+            class="bg-error/25 hover:bg-error/50 border-none xl:flex-1"
+          >
             <TheIcon type="heart" class="text-error" />
           </TheButton>
           <span class="whitespace-nowrap">我的收藏</span>
@@ -187,7 +191,11 @@ export default {
           :to="{ name: 'history' }"
           class="btn btn-ghost flex-1 px-0 justify-start gap-4 flex-nowrap"
         >
-          <TheButton type="info" class="bg-info/25 hover:bg-info/50 border-none xl:flex-1">
+          <TheButton
+            id="historyBtn"
+            type="info"
+            class="bg-info/25 hover:bg-info/50 border-none xl:flex-1"
+          >
             <TheIcon type="clock-rotate-left" class="text-info" />
           </TheButton>
           <span class="whitespace-nowrap">历史浏览</span>
@@ -224,3 +232,15 @@ export default {
     </dialog>
   </main>
 </template>
+
+<style scoped>
+@supports not (color: oklch(0 0 0)) {
+  #favoriteBtn {
+    background-color: rgba(248 113 113 / 25%);
+  }
+
+  #historyBtn {
+    background-color: rgba(96 165 250 / 25%);
+  }
+}
+</style>
