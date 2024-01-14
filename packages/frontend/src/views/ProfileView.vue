@@ -1,5 +1,6 @@
 <script>
 import { onMounted, onUnmounted, ref } from 'vue'
+import { RouterLink } from 'vue-router'
 import { useUserStore } from '@/stores/userStore'
 import TheAvatar from '@/components/TheAvatar.vue'
 import { refresh } from '@/utils/router'
@@ -11,7 +12,7 @@ const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg']
 
 export default {
   name: 'ProfileView',
-  components: { TheIcon, TheButton, TheAvatar },
+  components: { TheIcon, TheButton, TheAvatar, RouterLink },
   setup() {
     const userStore = useUserStore()
     const { token } = useToken
@@ -158,7 +159,7 @@ export default {
           登出
         </TheButton>
       </div>
-      <div class="navbar rounded-xl bg-primary w-full px-4">
+      <div class="navbar px-4 rounded-xl bg-primary w-full">
         <div class="flex-none lg:flex lg:flex-col lg:w-full lg:items-start lg:pl-2">
           <span class="text-xl pr-4 tracking-widest text-white">UID</span>
           <span class="text-sm tracking-wider">{{ uid }}</span>
@@ -167,6 +168,31 @@ export default {
       <div class="navbar px-4 rounded-xl bg-primary w-full text-lg">
         <span class="pr-6 tracking-wider text-white font-base font-black">注册时间</span>
         <span class="tracking-wide">{{ createdAt }}</span>
+      </div>
+      <div
+        class="navbar px-4 rounded-box bg-primary w-full lg:col-span-2 flex font-base font-black"
+      >
+        <router-link
+          :to="{ name: 'favorite' }"
+          class="btn btn-ghost flex-1 px-0 justify-start gap-4 flex-nowrap"
+        >
+          <TheButton type="error" class="bg-error/25 hover:bg-error/50 border-none xl:flex-1">
+            <TheIcon type="heart" class="text-error" />
+          </TheButton>
+          <span class="whitespace-nowrap">我的收藏</span>
+          <span class="text-lg lg:text-xl flex-1 text-white font-Poppins">&gt;</span>
+        </router-link>
+        <div class="divider divider-horizontal mx-3"></div>
+        <router-link
+          :to="{ name: 'history' }"
+          class="btn btn-ghost flex-1 px-0 justify-start gap-4 flex-nowrap"
+        >
+          <TheButton type="info" class="bg-info/25 hover:bg-info/50 border-none xl:flex-1">
+            <TheIcon type="clock-rotate-left" class="text-info" />
+          </TheButton>
+          <span class="whitespace-nowrap">历史浏览</span>
+          <span class="text-lg flex-1 text-white font-Poppins">&gt;</span>
+        </router-link>
       </div>
     </div>
     <dialog class="modal" ref="previewAvatarModal">

@@ -108,7 +108,7 @@ export default {
       ></textarea>
     </div>
     <TheButton
-      type="neutral"
+      type="info"
       :disabled="isSubmitDisabled"
       class="h-10 w-20 self-end font-base"
       @click="commentSubmitHandler"

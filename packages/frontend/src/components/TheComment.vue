@@ -51,7 +51,7 @@ export default {
       }}</span>
       <p class="text-neutral-content 3xl:text-lg">{{ content }}</p>
     </div>
-    <div class="flex-none text-neutral">
+    <div class="flex-none">
       <TheIcon type="thumbs-up" />
       &nbsp;&nbsp;
       <span>{{ likes }}</span>

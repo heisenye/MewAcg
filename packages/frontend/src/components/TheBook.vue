@@ -186,6 +186,13 @@ export default {
             :variant="isFavorited ? 'solid' : 'regular'"
           />
         </TheButton>
+        <div class="mx-auto rating mb-4">
+          <input type="radio" name="rating-1" class="mask mask-star size-8 bg-warning" />
+          <input type="radio" name="rating-1" class="mask mask-star size-8 bg-warning" checked />
+          <input type="radio" name="rating-1" class="mask mask-star size-8 bg-warning" />
+          <input type="radio" name="rating-1" class="mask mask-star size-8 bg-warning" />
+          <input type="radio" name="rating-1" class="mask mask-star size-8 bg-warning" />
+        </div>
         <h3 class="text-xl 3xl:text-2xl mx-auto font-base font-black">章节</h3>
         <div>
           <TheButton

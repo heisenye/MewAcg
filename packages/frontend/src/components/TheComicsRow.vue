@@ -33,7 +33,7 @@ export default {
           class="relative inline-flex flex-col align-top w-2/5 md:w-1/3 lg:w-1/4 xl:w-1/5 [@media(any-hover:none)]:px-2.5 box-border overflow-hidden [@media(any-hover:hover)]:w-full"
         >
           <div
-            class="relative w-full align-top rounded-t-2xl [@media(any-hover:hover)]:rounded-t-xl [@media(any-hover:hover)]:md:rounded-t-2xl overflow-hidden"
+            class="relative max-h-48 w-full align-top rounded-t-2xl [@media(any-hover:hover)]:rounded-t-xl [@media(any-hover:hover)]:md:rounded-t-2xl overflow-hidden"
           >
             <TheImage
               :src="`${BASE_URL}/${comic._id}/${comic.coverImage.chapter}/${comic.coverImage.page}.webp`"

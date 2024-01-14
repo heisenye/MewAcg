@@ -33,11 +33,11 @@ export default {
         <TheImage
           :src="`${BASE_URL}/${comic._id}/${comic.coverImage.chapter}/${comic.coverImage.page}.webp`"
           :blur="false"
-          class="cursor-pointer"
+          class="cursor-pointer max-h-48 2xl:max-h-none"
           @click="goBook(comic._id)"
         />
         <div class="card-body bg-primary rounded-b-2xl pt-4 px-4 pb-3">
-          <h1 class="text-base text-center tracking-wide font-NotoSerif font-black">
+          <h1 class="text-sm 2xl:text-base text-center tracking-wide font-NotoSerif font-black">
             {{ comic.name }}
           </h1>
           <span class="text-xs text-neutral-content font-Noto font-black">{{ comic.author }}</span>

@@ -46,7 +46,7 @@ export default {
         }
       }
       if (windowWidth.value > 600) {
-        const gap = (544 - 56 * 5) / 6
+        const gap = (516 - 56 * 5) / 6
         return { left: activeLinkIndex.value * (gap + 56) + gap + 'px' }
       } else {
         const gap = (windowWidth.value - 56 * 5) / 6
@@ -92,13 +92,13 @@ export default {
         class="absolute left-1/2 -translate-x-1/2 max-w-screen-lg 3xl:max-w-screen-xl w-full flex justify-evenly"
       >
         <template v-for="(link, index) in links" :key="link">
-          <RouterLink
+          <router-link
             :to="{ name: link.name }"
-            class="link link-hover text-base 3xl:text-lg font-black px-3 py-1 font-base"
+            class="link link-hover text-base font-black px-3 py-1 font-base"
             :class="{ 'text-info': activeLinkIndex === index }"
             @click="() => (activeLinkIndex = index)"
             >{{ link.zh }}
-          </RouterLink>
+          </router-link>
         </template>
         <span
           class="bg-info transition-all duration-300 ease-in-out absolute top-12 w-[60px] h-[2px]"

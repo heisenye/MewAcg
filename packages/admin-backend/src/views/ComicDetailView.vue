@@ -130,7 +130,7 @@ export default {
         formData
       })
       if (response && response.code === 200) {
-        document.getElementById('newChapter').close()
+        document.getElementById('newChapterModal').close()
         showMsg({
           messageType: 'success',
           msg: msg['CREATE_COMIC_CHAPTER_SUCCESS'],
@@ -576,7 +576,7 @@ export default {
                 size="md"
                 shape="circle"
                 class="ml-auto"
-                onclick="document.getElementById('newChapter').showModal()"
+                onclick="document.getElementById('newChapterModal').showModal()"
               >
                 <TheIcon type="plus" size="xl" class="text-white" />
               </TheButton>
@@ -588,7 +588,7 @@ export default {
 
 
 <!--      newChapterModal-->
-      <TheModal id="newChapter">
+      <TheModal id="newChapterModal">
         <h1 class="text-center text-lg">第{{ selectedComic.chapters + 1 }}章</h1>
         <div class="w-full mt-4 px-4 grid grid-cols-3 gap-4">
           <div v-for="(image, index) in imageUrls" :key="index" class="relative rounded-lg">
