@@ -42,6 +42,9 @@ export default {
           }
         )
         observer.observe(el)
+      },
+      updated(el) {
+        el.src = el.dataset.src
       }
     }
   },

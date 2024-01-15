@@ -124,13 +124,13 @@ const routes = [
   }
 ]
 
-// if (import.meta.env.MODE === 'development') {
-//   routes.push({
-//     path: '/test',
-//     name: 'test',
-//     component: () => import('../views/TestView.vue')
-//   })
-// }
+if (import.meta.env.MODE === 'development') {
+  routes.push({
+    path: '/test',
+    name: 'test',
+    component: () => import('../views/TestView.vue')
+  })
+}
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),

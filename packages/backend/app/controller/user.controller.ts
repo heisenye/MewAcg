@@ -51,7 +51,7 @@ class UserController {
       data: {
         id,
         username,
-        createdAt: new Date(createdAt).toLocaleDateString(),
+        createdAt: new Date(createdAt).toISOString().split('T')[0],
         token
       }
     })

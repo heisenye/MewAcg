@@ -64,9 +64,7 @@ export function getComicChapter(id, chapter) {
 }
 
 export function getHistoryComics(ids) {
-  if (!ids) {
-    return
-  }
+  if (ids.length === 0) return
   const query = ids.map((id) => `id=${id}`).join(`&`)
 
   return request(

@@ -17,7 +17,7 @@ export const useUserStore = defineStore({
     setUser(user) {
       this.id = user.id
       this.username = user.username
-      this.createdAt = user.createdAt || new Date('2042-1-1').toLocaleDateString()
+      this.createdAt = user.createdAt
     },
     logout() {
       this.id = ''

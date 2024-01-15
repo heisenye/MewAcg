@@ -1,22 +1,25 @@
 import { ref, watch } from 'vue'
 
+const getToday = () => new Date().toISOString().split('T')[0]
+
 const getHistoryFromStorage = () => {
-  return JSON.parse(localStorage.getItem('history') ?? JSON.stringify([]))
+  return JSON.parse(localStorage.getItem('history') ?? JSON.stringify({}))
 }
 
 const history = ref(getHistoryFromStorage())
 
 const storeHistoryToStorage = (id) => {
-  const idSet = new Set(history.value)
-  if (idSet.has(id)) idSet.delete(id)
-  idSet.add(id)
-  history.value = Array.from(idSet)
+  const today = getToday()
+  const todayHistory = new Set(history.value[today] ?? [])
+  if (todayHistory.has(id)) todayHistory.delete(id)
+  todayHistory.add(id)
+  history.value = { ...history.value, [today]: Array.from(todayHistory) }
 }
 
-const removeHistoryFromStorage = (id) => {
-  const idSet = new Set(history.value)
-  idSet.delete(id)
-  history.value = Array.from(idSet)
+const removeHistoryFromStorage = (date, id) => {
+  const theDayHistory = new Set(history.value[date] ?? [])
+  theDayHistory.delete(id)
+  history.value = { ...history.value, [date]: Array.from(theDayHistory) }
 }
 
 watch(history, (newVal) => localStorage.setItem('history', JSON.stringify(newVal)))
@@ -28,10 +31,3 @@ const useHistory = {
 }
 
 export default useHistory
-// export function useHistory() {
-//   return {
-//     history,
-//     storeHistoryToStorage,
-//     removeHistoryFromStorage
-//   }
-// }
