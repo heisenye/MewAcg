@@ -10,10 +10,10 @@ const history = ref(getHistoryFromStorage())
 
 const storeHistoryToStorage = (id) => {
   const today = getToday()
-  const todayHistory = new Set(history.value[today] ?? [])
+  const todayHistory = new Set(history.value[today].reverse() ?? [])
   if (todayHistory.has(id)) todayHistory.delete(id)
   todayHistory.add(id)
-  history.value = { ...history.value, [today]: Array.from(todayHistory) }
+  history.value = { ...history.value, [today]: Array.from(todayHistory).reverse() }
 }
 
 const removeHistoryFromStorage = (date, id) => {

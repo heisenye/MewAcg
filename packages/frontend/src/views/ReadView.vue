@@ -33,7 +33,10 @@ export default {
 
     onMounted(async () => {
       const response = await getComicChapter(id, chapter)
-      pages.value = response.data.pages
+      if (response && response.code === 200) pages.value = response.data.pages
+      document.title = ''
+      document.title = `${response.data.comicId.name} - ${response.data.chapter}`
+
       window.addEventListener('scroll', scrollFn)
       if (!token) return
       await postView(id, date)

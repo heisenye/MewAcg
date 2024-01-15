@@ -79,7 +79,8 @@ const routes = [
     component: () => import('../views/ReadView.vue'),
     meta: {
       showNav: false
-    }
+    },
+    props: true
   },
   {
     path: '/login',

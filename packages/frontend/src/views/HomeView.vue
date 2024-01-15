@@ -57,8 +57,12 @@ export default {
     <div class="relative top-4 max-w-screen-2xl mx-auto">
       <div class="flex justify-between items-center mb-1 font-base">
         <span class="relative left-6 text-xl 2xl:text-2xl text-white font-black"> 热门推荐 </span>
-        <TheButton type="ghost">
-          <span>更多&gt;</span>
+        <TheButton
+          type="ghost"
+          class="[@media(any-hover:hover)]:relative [@media(any-hover:hover)]:right-4"
+        >
+          更多
+          <span class="text-lg text-white font-Poppins">&gt;</span>
         </TheButton>
       </div>
       <TheComicsRow v-if="comicList" :comic-list="comicList" />

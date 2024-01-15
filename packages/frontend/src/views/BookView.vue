@@ -22,8 +22,9 @@ export default {
       const response = await getComic(id)
       if (response && response.code === 200) {
         comic.value = response.data
-        document.title = `${comic.value.name}`
       }
+      document.title = ''
+      document.title = comic.value.name
     })
 
     return {

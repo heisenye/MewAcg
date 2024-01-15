@@ -8,6 +8,27 @@ export default {
     IndexNavigation,
     RouterView
   }
+  // data() {
+  //   return {
+  //     originalTitle: ''
+  //   }
+  // },
+  // methods: {
+  //   visibilitychangeHandler() {
+  //     if (document.visibilityState === 'visible') {
+  //       document.title = this.originalTitle
+  //     } else {
+  //       document.title = '(^-人-^)'
+  //     }
+  //   }
+  // },
+  // mounted() {
+  //   this.originalTitle = document.title
+  //   document.addEventListener('visibilitychange', this.visibilitychangeHandler)
+  // },
+  // destroyed() {
+  //   document.removeEventListener('visibilitychange', this.visibilitychangeHandler)
+  // }
 }
 </script>
 
@@ -34,6 +55,7 @@ export default {
 .component-leave-to {
   opacity: 0;
 }
+
 .nav-enter-active,
 .nav-leave-active {
   transition: opacity ease-in 0.3s;

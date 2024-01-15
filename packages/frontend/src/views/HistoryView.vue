@@ -61,7 +61,7 @@ export default {
   <main class="relative top-40 mx-auto w-full max-w-screen-2xl min-w-[300px] px-1 text-white">
     <template v-for="history in populatedHistories" :key="history.date">
       <div v-if="history.comics.length" class="divider divider-secondary">{{ history.date }}</div>
-      <template v-for="comic in history.comics">
+      <template v-for="comic in history.comics" :key="comic._id">
         <article
           class="w-1/3 md:w-1/3 lg:w-1/4 xl:w-1/5 card inline-flex mb-4 px-2 md:px-3 lg:px-2 indicator align-top"
         >

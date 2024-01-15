@@ -218,14 +218,14 @@ export default {
           </div>
         </TheModal>
         <div class="grid grid-cols-4 gap-x-6 place-items-center">
-          <template v-for="n in chapters" :key="n">
-            <RouterLink
-              :to="{ name: 'read', params: { id, chapter: n } }"
+          <template v-for="chapter in chapters" :key="chapter">
+            <router-link
+              :to="{ name: 'read', params: { id, chapter } }"
               class="btn btn-sm btn-secondary w-12"
               replace
             >
-              {{ n }}
-            </RouterLink>
+              {{ chapter }}
+            </router-link>
           </template>
         </div>
       </div>

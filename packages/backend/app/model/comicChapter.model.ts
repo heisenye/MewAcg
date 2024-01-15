@@ -8,6 +8,7 @@ export interface IComicChapter extends Document {
 
 const comicChapterSchema = new Schema({
   comicId: {
+    ref: 'Comic',
     type: Schema.Types.ObjectId
   },
   chapter: Number,

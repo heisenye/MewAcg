@@ -61,7 +61,10 @@ class ComicController {
 
   public async getComicImages(ctx: Context) {
     const { id, chapter } = ctx.params
-    const comicImages = await ComicChapter.findOne({ comicId: id, chapter: Number(chapter) })
+    const comicImages = await ComicChapter.findOne({ comicId: id, chapter: chapter }).populate(
+      'comicId',
+      'name'
+    )
     if (!comicImages) {
       ctx.response.status = ResponseCode.Not_Found
       ctx.body = Response.NoComic()
