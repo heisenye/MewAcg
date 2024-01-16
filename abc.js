@@ -68,3 +68,25 @@
 // //   console.log(value)
 // // }
 //
+
+
+console.log(new Date().toISOString().split('T')[0])
+
+console.log(new Date().toLocaleString('en-CA'))
+
+console.log(new Date().toLocaleDateString('en-CA'))
+
+
+function sum(num) {
+  return num
+}
+async function a(b) {
+  if (b === '1') {
+    throw new Error('1')
+  }
+  return sum(b)
+}
+
+a('1')
+  .catch(err => console.log(err))
+

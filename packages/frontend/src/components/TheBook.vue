@@ -156,18 +156,20 @@ export default {
             {{ author }}
           </TheButton>
         </div>
-        <div class="space-x-1.5 text-white font-base">
+        <div class="flex text-white font-base whitespace-nowrap">
           标签：
-          <template v-for="tag in tags" :key="tag">
-            <TheButton
-              class="font-Noto"
-              type="secondary"
-              size="sm"
-              @click="goSearchResult(tag, 'tag')"
-            >
-              {{ tag }}
-            </TheButton>
-          </template>
+          <div class="flex flex-1 flex-wrap gap-2">
+            <template v-for="tag in tags" :key="tag">
+              <TheButton
+                class="font-Noto"
+                type="secondary"
+                size="sm"
+                @click="goSearchResult(tag, 'tag')"
+              >
+                {{ tag }}
+              </TheButton>
+            </template>
+          </div>
         </div>
         <div class="text-white font-base flex">
           <span class="whitespace-nowrap">简介：</span>

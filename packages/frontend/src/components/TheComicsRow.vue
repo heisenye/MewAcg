@@ -26,7 +26,8 @@ export default {
     class="relative w-full max-w-screen-2xl min-w-[300px] mx-auto [@media(any-hover:hover)]:px-6 [@media(any-hover:none)]:px-1.5 text-white"
   >
     <div
-      class="w-full whitespace-nowrap overflow-x-scroll [@media(any-hover:hover)]:grid [@media(any-hover:hover)]:grid-rows-2 [@media(any-hover:hover)]:grid-cols-3 [@media(any-hover:hover)]:lg:grid-cols-4 [@media(any-hover:hover)]:xl:grid-cols-5 [@media(any-hover:hover)]:gap-y-4 [@media(any-hover:hover)]:gap-x-4 @media:(any-hover:none):md:gap-x-6"
+      style="grid-auto-rows: 0"
+      class="w-full overflow-hidden whitespace-nowrap overflow-x-scroll [@media(any-hover:hover)]:grid [@media(any-hover:hover)]:grid-rows-2 [@media(any-hover:hover)]:grid-cols-3 [@media(any-hover:hover)]:lg:grid-cols-4 [@media(any-hover:hover)]:xl:grid-cols-5 [@media(any-hover:hover)]:gap-y-4 [@media(any-hover:hover)]:gap-x-4 @media:(any-hover:none):md:gap-x-6"
     >
       <template v-for="comic in comicList" :key="comic._id">
         <div

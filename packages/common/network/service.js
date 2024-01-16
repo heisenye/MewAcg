@@ -37,7 +37,6 @@ service.interceptors.response.use(
     return response
   },
   (error) => {
-    console.log(error)
     if (error.config.loading) {
       error.config.loading.remove()
     }

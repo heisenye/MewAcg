@@ -1,31 +1,36 @@
 import { request } from 'common'
-const blankCb = () => {}
+
+const errorHandler = (error) => {
+  if (import.meta.env.DEV) {
+    console.error(error)
+  }
+}
 
 export function getConfig() {
   return request({
     method: 'GET',
     url: '/config'
-  }).catch(blankCb)
+  }).catch(errorHandler)
 }
 
 export function getComics() {
   return request({
     method: 'GET',
     url: '/comics'
-  }).catch(blankCb)
+  }).catch(errorHandler)
 }
 
 export function getPopularComics() {
   return request({
     method: 'GET',
     url: '/comics/popular'
-  }).catch(blankCb)
+  }).catch(errorHandler)
 }
 export function getComic(id) {
   return request({
     method: 'GET',
     url: `/comics/${id}`
-  }).catch(blankCb)
+  }).catch(errorHandler)
 }
 
 export function login(data) {
@@ -39,7 +44,7 @@ export function login(data) {
       useCache: false,
       useThrottle: false
     }
-  ).catch(blankCb)
+  ).catch(errorHandler)
 }
 
 export function register(data) {
@@ -53,14 +58,14 @@ export function register(data) {
       useCache: false,
       useThrottle: false
     }
-  ).catch(blankCb)
+  ).catch(errorHandler)
 }
 
 export function getComicChapter(id, chapter) {
   return request({
     method: 'GET',
     url: `/comics/${id}/${chapter}`
-  }).catch(blankCb)
+  }).catch(errorHandler)
 }
 
 export function getHistoryComics(ids) {
@@ -75,7 +80,7 @@ export function getHistoryComics(ids) {
     {
       useCache: false
     }
-  ).catch(blankCb)
+  ).catch(errorHandler)
 }
 
 export function getProfile(token) {
@@ -88,7 +93,7 @@ export function getProfile(token) {
     {
       useCache: false
     }
-  ).catch(blankCb)
+  ).catch(errorHandler)
 }
 
 export function postFavorite(data) {
@@ -103,7 +108,7 @@ export function postFavorite(data) {
       useThrottle: true,
       throttleTime: 3000
     }
-  ).catch(blankCb)
+  ).catch(errorHandler)
 }
 
 export function deleteFavorite(id) {
@@ -117,7 +122,7 @@ export function deleteFavorite(id) {
       useThrottle: true,
       throttleTime: 3000
     }
-  ).catch(blankCb)
+  ).catch(errorHandler)
 }
 
 export function getFavoriteComics() {
@@ -131,7 +136,7 @@ export function getFavoriteComics() {
       useThrottle: true,
       throttleTime: 1000
     }
-  ).catch(blankCb)
+  ).catch(errorHandler)
 }
 
 export function getFavorite(id) {
@@ -145,7 +150,7 @@ export function getFavorite(id) {
       useThrottle: true,
       throttleTime: 1000
     }
-  ).catch(blankCb)
+  ).catch(errorHandler)
 }
 
 export function postAvatar(data) {
@@ -156,7 +161,7 @@ export function postAvatar(data) {
     headers: {
       'Content-Type': 'multipart/form-data'
     }
-  }).catch(blankCb)
+  }).catch(errorHandler)
 }
 
 export function getSearch(keyword, type = 'name') {
@@ -176,7 +181,7 @@ export function getSearch(keyword, type = 'name') {
       useCache: true,
       useThrottle: false
     }
-  ).catch(blankCb)
+  ).catch(errorHandler)
 }
 
 export function getComicComments(id) {
@@ -189,7 +194,7 @@ export function getComicComments(id) {
       useCache: false,
       useThrottle: false
     }
-  ).catch(blankCb)
+  ).catch(errorHandler)
 }
 
 export function postComicComment({ id, content }) {
@@ -203,7 +208,7 @@ export function postComicComment({ id, content }) {
       useCache: false,
       useThrottle: false
     }
-  ).catch(blankCb)
+  ).catch(errorHandler)
 }
 
 export function postView(id, date) {
@@ -217,5 +222,5 @@ export function postView(id, date) {
       useCache: false,
       useThrottle: false
     }
-  ).catch(blankCb)
+  ).catch(errorHandler)
 }

@@ -6,7 +6,7 @@ function createRequest() {
   const cache = new Map()
   const timeStamps = new Map()
 
-  function execute(config, { useCache = true, useThrottle = false, throttleTime = 3000 } = {}) {
+  async function execute(config, { useCache = true, useThrottle = false, throttleTime = 3000 } = {}) {
     const configKey = JSON.stringify(config)
     const now = Date.now()
     const prev = timeStamps.get(configKey)

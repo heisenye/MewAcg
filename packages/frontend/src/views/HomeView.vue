@@ -33,7 +33,7 @@ export default {
 
 <template>
   <main class="relative top-40">
-    <div class="max-w-screen-2xl mx-auto">
+    <section id="tags" class="max-w-screen-2xl mx-auto">
       <div class="flex justify-between items-center mb-3 font-base">
         <span class="relative left-6 text-xl 2xl:text-2xl text-white font-Poppins font-black">
           Tags
@@ -53,8 +53,8 @@ export default {
           </TheButton>
         </template>
       </div>
-    </div>
-    <div class="relative top-4 max-w-screen-2xl mx-auto">
+    </section>
+    <section id="popularity" class="relative top-4 max-w-screen-2xl mx-auto">
       <div class="flex justify-between items-center mb-1 font-base">
         <span class="relative left-6 text-xl 2xl:text-2xl text-white font-black"> 热门推荐 </span>
         <TheButton
@@ -67,6 +67,6 @@ export default {
       </div>
       <TheComicsRow v-if="comicList" :comic-list="comicList" />
       <div class="divider divider-secondary text-accent font-Noto">(=^ ◡ ^=)</div>
-    </div>
+    </section>
   </main>
 </template>

@@ -85,6 +85,7 @@ export default {
 
     const bulkAddComicImage = (e) => {
       const images = e.target.files
+      console.log(images)
       if (images) {
         for (let i = 0; i < images.length; i++) {
           const image = images[i]
@@ -305,7 +306,7 @@ export default {
 
         <div class="divider divider-primary"></div>
 <!--        status-->
-        <div class="w-full pl-4">
+        <div class="w-full flex pl-4">
           <span class="mr-auto text-lg 2xl:text-xl">状态</span>
           <span class="text-lg mx-auto">{{
             statuses.find((status) => status.value === selectedComic.status).label
@@ -346,8 +347,8 @@ export default {
 
         <div class="divider divider-primary"></div>
 <!--        description-->
-        <div class="w-full pl-4">
-          <span class="mr-auto text-lg 2xl:text-xl">简介</span>
+        <div class="w-full flex gap-3 pl-4">
+          <span class="text-lg 2xl:text-xl whitespace-nowrap flex-none">简介</span>
           <span class="text-sm mx-auto text-center">{{ selectedComic.description }}</span>
           <TheButton
             type="ghost"
@@ -383,11 +384,13 @@ export default {
 
         <div class="divider divider-primary"></div>
         <!--     tags     -->
-        <div class="w-full pl-4">
-          <span class="mr-auto text-lg 2xl:text-xl">标签</span>
-          <template v-for="tag in selectedComic.tags">
-            <TheButton type="ghost" class="mx-auto bg-base-300">{{ tag }}</TheButton>
-          </template>
+        <div class="w-full flex gap-3 pl-4">
+          <span class="mr-3 text-lg 2xl:text-xl whitespace-nowrap">标签</span>
+          <div class="flex-1 flex justify-center flex-wrap gap-2">
+            <template v-for="tag in selectedComic.tags">
+              <TheButton type="ghost" class="mx-auto bg-base-300">{{ tag }}</TheButton>
+            </template>
+          </div>
           <TheButton
             type="ghost"
             size="sm"

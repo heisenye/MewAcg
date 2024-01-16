@@ -64,7 +64,7 @@ export default {
         defaultClasses,
         { 'btn-disabled': props.disabled },
         { 'cursor-not-allowed': props.disabled },
-        { 'tooltip tooltip-bottom tooltip-secondary font-normal font-base': props.tooltip },
+        { 'tooltip tooltip-bottom tooltip-secondary  font-black font-base': props.tooltip },
         {
           'transition-all duration-300 ease-in-out before:circle-splash before:active:circle-splash-active':
             props.transition
