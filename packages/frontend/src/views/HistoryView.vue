@@ -11,46 +11,38 @@ export default {
   methods: { goBook },
   components: { TheImage, TheIcon },
   setup() {
-    const { history, removeHistoryFromStorage } = useHistory
+    const { getHistoryFromDB } = useHistory
+    const history = shallowRef([])
+    const historyIds = computed(() => history.value.map((item) => item.id))
+    const groupedHistory = computed(() => {
+      return Object.entries(
+        populatedHistories.value.reduce((acc, cur) => {
+          acc[cur.date] = acc[cur.date] || []
+          acc[cur.date].push(cur.comic)
+          return acc
+        }, {})
+      ).sort((a, b) => new Date(b[0]) - new Date(a[0]))
+    })
 
     const populatedHistories = shallowRef([])
-    const removeHistoryComic = (date, id) => {
-      removeHistoryFromStorage(date, id)
-      populatedHistories.value = [
-        ...populatedHistories.value.filter((history) => history.date !== date),
-        {
-          date,
-          comics: populatedHistories.value
-            .find((history) => history.date === date)
-            .comics.filter((comic) => comic._id !== id)
-        }
-      ].sort((a, b) => new Date(b.date) - new Date(a.date))
-    }
 
-    const historyIds = computed(() => {
-      const idSet = new Set()
-      Object.values(history.value).forEach((ids) => ids.forEach((id) => idSet.add(id)))
-      return [...idSet]
-    })
     onMounted(async () => {
+      history.value = await getHistoryFromDB()
       const response = await getHistoryComics(historyIds.value)
-      if (response && response.code === 200) {
-        const comics = response.data
-        populatedHistories.value = Object.keys(history.value)
-          .sort((a, b) => new Date(b) - new Date(a))
-          .map((date) => {
-            return {
-              date,
-              comics: history.value[date].map((id) => comics.find((comic) => comic._id === id))
-            }
-          })
-      }
+      populatedHistories.value = history.value
+        .map((item) => {
+          return {
+            ...item,
+            comic: response.data.find((comic) => comic._id === item.id)
+          }
+        })
+        .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
     })
 
     return {
       BASE_URL,
-      removeHistoryComic,
       populatedHistories,
+      groupedHistory,
       historyIds
     }
   }
@@ -59,9 +51,9 @@ export default {
 
 <template>
   <main class="relative top-40 mx-auto w-full max-w-screen-2xl min-w-[300px] px-1 text-white">
-    <template v-for="history in populatedHistories" :key="history.date">
-      <div v-if="history.comics.length" class="divider divider-secondary">{{ history.date }}</div>
-      <template v-for="comic in history.comics" :key="comic._id">
+    <template v-for="history in groupedHistory" :key="history[0]">
+      <div v-if="history[1].length" class="divider divider-secondary">{{ history[0] }}</div>
+      <template v-for="comic in history[1]" :key="comic._id">
         <article
           class="w-1/3 md:w-1/3 lg:w-1/4 xl:w-1/5 card inline-flex mb-4 px-2 md:px-3 lg:px-2 indicator align-top"
         >
@@ -74,7 +66,6 @@ export default {
           <TheIcon
             type="xmark"
             class="indicator-item badge badge-error right-3 cursor-pointer fa-solid text-black"
-            @click="removeHistoryComic(history.date, comic._id)"
           />
           <div
             class="card-body text-xs text-center bg-primary rounded-b-xl py-4 px-0 font-bold font-NotoSerif"
@@ -85,10 +76,7 @@ export default {
         </article>
       </template>
     </template>
-    <h1
-      v-if="historyIds.length === 0"
-      class="relative top-20 text-lg text-center font-base font-black"
-    >
+    <h1 v-if="!historyIds.length" class="relative top-20 text-lg text-center font-base font-black">
       当前未观看漫画哦
     </h1>
   </main>

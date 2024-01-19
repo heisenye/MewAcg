@@ -130,7 +130,7 @@ export default {
       </template>
     </TheNavigation>
     <div class="z-10 fixed top-16 py-0 navbar bg-primary rounded-b-box flex-col font-base">
-      <div class="relative top-0 my-0 w-full divider divider-accent"></div>
+      <div class="relative top-0 my-0 w-full divider divider-secondary"></div>
       <div class="w-full mb-4 px-6 whitespace-nowrap flex-col items-start gap-2">
         <span class="mt-3 text-accent-content font-black">搜寻设定</span>
         <div class="w-full flex items-center gap-3">

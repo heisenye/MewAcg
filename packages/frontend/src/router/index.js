@@ -1,10 +1,12 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import useHistory from '@/utils/useHistory.js'
+import useStorageHistory from '@/utils/useStorageHistory.js'
+import useHistoryTest from '@/utils/useHistory.js'
 import { useToken, showMsg, msg } from 'common'
 
 const { token } = useToken
-const { storeHistoryToStorage } = useHistory
+const { storeHistoryToStorage } = useStorageHistory
+const { storeHistoryToDB } = useHistoryTest
 
 const routes = [
   {
@@ -69,6 +71,7 @@ const routes = [
     },
     beforeEnter: (to, from, next) => {
       storeHistoryToStorage(to.params.id)
+      storeHistoryToDB(to.params.id)
       to.meta.isProgressRemembered = 'true' === localStorage.getItem('isProgressRemembered')
       next()
     }

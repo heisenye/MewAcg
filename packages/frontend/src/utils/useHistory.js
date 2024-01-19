@@ -1,33 +1,72 @@
-import { ref, watch } from 'vue'
+const openDB = () => {
+  return new Promise((resolve, reject) => {
+    const request = indexedDB.open('history', 1)
 
-const getToday = () => new Date().toLocaleDateString('en-CA')
+    request.onupgradeneeded = (ev) => {
+      const db = ev.target.result
+      if (!db.objectStoreNames.contains('history')) {
+        const store = db.createObjectStore('history', { keyPath: 'id' })
+        store.createIndex('date', 'date', { unique: false })
+      }
+    }
 
-const getHistoryFromStorage = () => {
-  return JSON.parse(localStorage.getItem('history') ?? JSON.stringify({}))
+    request.onsuccess = (ev) => {
+      resolve(ev.target.result)
+    }
+
+    request.onerror = (ev) => {
+      reject(ev.target.error)
+    }
+  })
 }
 
-const history = ref(getHistoryFromStorage())
+async function getHistoryFromDB() {
+  try {
+    const db = await openDB()
+    const tx = db.transaction(['history'], 'readwrite')
+    const store = tx.objectStore('history')
 
-const storeHistoryToStorage = (id) => {
-  const today = getToday()
-  const todayHistory = new Set((history.value[today] ?? []).reverse())
-  if (todayHistory.has(id)) todayHistory.delete(id)
-  todayHistory.add(id)
-  history.value = { ...history.value, [today]: Array.from(todayHistory).reverse() }
+    return new Promise((resolve, reject) => {
+      const getReq = store.getAll()
+
+      getReq.onsuccess = (ev) => {
+        resolve(ev.target.result)
+      }
+
+      getReq.onerror = (ev) => {
+        reject(ev.target.error)
+      }
+    })
+  } catch (error) {
+    console.error(error)
+    return []
+  }
 }
 
-const removeHistoryFromStorage = (date, id) => {
-  const theDayHistory = new Set(history.value[date] ?? [])
-  theDayHistory.delete(id)
-  history.value = { ...history.value, [date]: Array.from(theDayHistory) }
-}
+async function storeHistoryToDB(id) {
+  try {
+    const db = await openDB()
+    const tx = db.transaction(['history'], 'readwrite')
+    const store = tx.objectStore('history')
+    const date = new Date().toLocaleDateString('en-CA')
+    const timestamp = Date.now()
 
-watch(history, (newVal) => localStorage.setItem('history', JSON.stringify(newVal)))
+    const entry = {
+      date,
+      id,
+      timestamp
+    }
+    store.put(entry)
+
+    await tx.done
+  } catch (error) {
+    console.error(error)
+  }
+}
 
 const useHistory = {
-  history,
-  storeHistoryToStorage,
-  removeHistoryFromStorage
+  storeHistoryToDB,
+  getHistoryFromDB
 }
 
 export default useHistory
