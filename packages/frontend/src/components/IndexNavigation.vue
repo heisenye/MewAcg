@@ -94,7 +94,7 @@ export default {
         <template v-for="(link, index) in links" :key="link">
           <router-link
             :to="{ name: link.name }"
-            class="link link-hover text-base font-black px-3 py-1 font-base"
+            class="link link-hover text-base font-black px-3 py-1 6xl:text-lg font-base"
             :class="{ 'text-info': activeLinkIndex === index }"
             @click="() => (activeLinkIndex = index)"
             >{{ link.zh }}

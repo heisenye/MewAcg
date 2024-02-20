@@ -46,7 +46,7 @@ export default {
           <TheButton
             type="secondary"
             size="sm"
-            class="rounded-lg text-xs whitespace-nowrap"
+            class="rounded-lg text-xs whitespace-nowrap 6xl:text-sm"
             @click="goSearchResult(tag, 'tag')"
           >
             {{ tag }}

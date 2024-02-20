@@ -8,7 +8,7 @@
       <excludeFolder url="file://$MODULE_DIR$/packages/frontend/dist" />
       <excludeFolder url="file://$MODULE_DIR$/packages/backend/app/public/avatar" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.9 (mono)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.9 (MewAcg)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
