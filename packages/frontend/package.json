@@ -1,0 +1,17 @@
+{
+  "name": "frontend",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "vite --host",
+    "build": "vite build",
+    "preview": "vite preview --host",
+    "test:unit": "vitest",
+    "subset": "D:\\code\\MewAcg\\packages\\frontend\\scripts\\env\\Scripts\\python.exe ./scripts/subset.py",
+    "format": "prettier --write src/"
+  },
+  "dependencies": {
+    "common": "workspace:^",
+    "ui": "workspace:^"
+  }
+}
